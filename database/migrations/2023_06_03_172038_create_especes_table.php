@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('especes', function (Blueprint $table) {
+
             $table->id();
             $table->string('nom', 191);
             $table->string('groupe', 191);
             $table->string('icone', 50);
+            
         });
     }
 
