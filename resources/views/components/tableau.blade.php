@@ -1,9 +1,9 @@
 <div class="my-3">
     <table class="w-full border-2">
         <thead class="bg-slate-900 text-white">
-            @foreach ($titres as $titre)
-                @if ($titre['onTable'])
-                    <th class="border-2 border-white">{{ $titre['label'] }}</th>
+            @foreach ($cols as $col)
+                @if ($col['onTable'])
+                    <th class="border-2 border-white">{{ $col['label'] }}</th>
                 @endif
             @endforeach
             @if ($show)
@@ -15,16 +15,24 @@
         <tbody>
             @foreach ($items as $item)
                 <tr class="border-2">
-                    @foreach ($champs as $field => $champ)
-                        @if ($champ['onTable'])
-                            @if ($champ['type'] == 'select')
-                                <td class="p-2 border-2 text-{{ $champ['align'] }}">
-                                    {{ ucfirst($item->{$champ['belongsTo']}->{$champ['coltable']}) ?? " - " }}
+                    @foreach ($cols as $field => $col)
+                        @if ($col['onTable'])
+                            @if ($col['type'] == 'select')
+                                <td class="p-2 border-2 text-{{ $col['align'] }}">
+                                    {{ ucfirst($item->{$col['belongsTo']}->{$col['coltable']}) ?? ' - ' }}
                                 </td>
-                            @elseif ($champ['type'] == 'date')
-                                <td class="p-2 border-2 text-{{ $champ['align'] }}">{{ date('d/m/Y', strtotime($item->$field)) }} </td>
+                            @elseif ($col['type'] == 'date')
+                                <td class="p-2 border-2 text-{{ $col['align'] }}">
+                                    {{ date('d/m/Y', strtotime($item->$field)) }} </td>
+                            @elseif ($col['type'] = 'file')
+                                <td class="p-2 border-2">
+                                    <div class="flex justify-{{ $col['align'] }}">
+                                        <img class="w-8" src="{{ url('storage/img/' . $item->$field) }}"
+                                            alt="{{ $item->$field }}">
+                                    </div>
+                                </td>
                             @else
-                                <td class="p-2 border-2 text-{{ $champ['align'] }}">{{ $item->$field }} </td>
+                                <td class="p-2 border-2 text-{{ $col['align'] }}">{{ $item->$field }} </td>
                             @endif
                         @endif
                     @endforeach
