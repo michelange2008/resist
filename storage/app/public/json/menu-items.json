@@ -1,0 +1,12 @@
+{
+    "menu": {
+        "intitule": "Items",
+        "url": "items"
+    },
+    "sousmenus": {
+        "accessible": {
+            "intitule": "Espèces",
+            "url": "Espece"
+        }
+    }
+}

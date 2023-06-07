@@ -17,6 +17,7 @@
                     </x-nav-link>
                 </div>
             </div>
+            <x-dropdown-perso :menu="\Storage::json('public/json/menu-items.json')"></x-dropdown-perso>            
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
