@@ -12,6 +12,7 @@ class Anthelm_MoleculeTableSeeder extends CsvSeeder
         $this->file = '/database/seeders/csvs/anthelms_molecules.csv';
         $this->timestamps = false;
         $this->tablename = "anthelm_molecule";
+        $this->truncate = false;
     }
     /**Anthelms_MoleculesTableSeeder
      * Run the database seeds.

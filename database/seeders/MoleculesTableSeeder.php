@@ -11,6 +11,7 @@ class MoleculesTableSeeder extends CsvSeeder
     {
         $this->file = '/database/seeders/csvs/molecules.csv';
         $this->timestamps = false;
+        $this->truncate = false;
     }
     /**
      * Run the database seeds.

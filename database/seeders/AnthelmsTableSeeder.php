@@ -11,6 +11,7 @@ class AnthelmsTableSeeder extends CsvSeeder
     {
         $this->file = '/database/seeders/csvs/anthelms.csv';
         $this->timestamps = false;
+        $this->truncate = false;
     }
     /**
      * Run the database seeds.

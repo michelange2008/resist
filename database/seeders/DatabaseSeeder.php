@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(EspecesTableSeeder::class);
         // $this->call(ProductionsTableSeeder::class);
         // $this->call(MoleculesTableSeeder::class);
-        // $this->call(AnthelmsTableSeeder::class);
+        $this->call(AnthelmsTableSeeder::class);
         $this->call(Anthelm_MoleculeTableSeeder::class);
     }
 }

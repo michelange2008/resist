@@ -2,6 +2,7 @@
     "nom": "Especes",
     "model": "Espece",
     "icone": "especes.svg",
+    "orderBy": "nom",
     "add": true,
     "show": true,
 
