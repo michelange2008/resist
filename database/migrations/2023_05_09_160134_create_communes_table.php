@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('communes', function (Blueprint $table) {
+
             $table->id();
             $table->string('Commune', 191);
             $table->string('Codepos', 10);
             $table->string('Departement', 191);
             $table->strint('INSEE')->unique();
+            
         });
     }
 
