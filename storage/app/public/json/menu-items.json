@@ -8,6 +8,14 @@
             "intitule": "Espèces",
             "url": "Espece"
         },
+        "voie": {
+            "intitule": "Voies d'administration",
+            "url": "Voie"
+        },
+        "unite": {
+            "intitule": "Unités",
+            "url": "Unite"
+        },
         "production": {
             "intitule": "Types de production",
             "url": "Production"

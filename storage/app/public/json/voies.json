@@ -1,0 +1,41 @@
+{
+    "nom": "Voies d'administration",
+    "model": "Voie",
+    "icone": "voies.svg",
+    "orderBy": "nom",
+    "add": true,
+    "show": true,
+
+    "cols": {
+        "id": {
+            "col": "id",
+            "label": "Id",
+            "type": "id",
+            "taille": null,
+            "onTable": true,
+            "align": "left",
+            "required": true,
+            "rules": null
+        },
+        "nom": {
+            "col": "nom",
+            "label": "Nom",
+            "type": "string",
+            "taille": 10,
+            "onTable": true,
+            "align": "left",
+            "required": true,
+            "rules": "required|max:191|string"
+        },
+        "nom_long": {
+            "col": "nom_long",
+            "label": "Nom long",
+            "type": "string",
+            "taille": 191,
+            "onTable": true,
+            "align": "left",
+            "required": true,
+            "rules": "required|max:191|string"
+        }
+    }
+}

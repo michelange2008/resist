@@ -13,9 +13,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // $this->call(EspecesTableSeeder::class);
+        // $this->call(VoieTableSeeder::class);
+        $this->call(UniteTableSeeder::class);
         // $this->call(ProductionsTableSeeder::class);
         // $this->call(MoleculesTableSeeder::class);
-        $this->call(AnthelmsTableSeeder::class);
-        $this->call(Anthelm_MoleculeTableSeeder::class);
+        // $this->call(AnthelmsTableSeeder::class);
+        // $this->call(Anthelm_MoleculeTableSeeder::class);
     }
 }

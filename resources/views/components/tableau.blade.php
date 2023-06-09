@@ -19,7 +19,7 @@
                         @if ($col['onTable'])
                             @if ($col['type'] == 'select')
                                 <td class="p-2 border-2 text-{{ $col['align'] }}">
-                                    {{ ucfirst($item->{$col['belongsTo']}->{$col['coltable']}) ?? ' - ' }}
+                                    {{ $item->{$col['belongsTo']}->{$col['coltable']} ?? ' - ' }}
                                 </td>
                             @elseif ($col['type'] == 'date')
                                 <td class="p-2 border-2 text-{{ $col['align'] }}">

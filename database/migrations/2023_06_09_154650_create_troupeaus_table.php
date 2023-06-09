@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('anthelm_espece', function (Blueprint $table) {
+        Schema::create('troupeaus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('anthelm_id')->constrained();
+            $table->foreignId('ferme_id')->constrained();
             $table->foreignId('espece_id')->constrained();
-            $table->foreignId('voie_id')->constrained();
-            $table->foreignId('unite_id')->constrained();
-            $table->float('posologie', 8, 2);
-            $table->float('lait', 8, 2);
-            $table->float('viande', 8, 2);
+            $table->foreignId('production_id')->constrained();
+            $table->unsignedInteger('effectif');
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('anthelm_espece');
+        Schema::dropIfExists('troupeaus');
     }
 };
