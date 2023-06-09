@@ -1,0 +1,50 @@
+{
+    "nom": "Especes",
+    "model": "Espece",
+    "icone": "especes.svg",
+    "add": true,
+    "show": true,
+
+    "cols": {
+        "id": {
+            "col": "id",
+            "label": "Id",
+            "type": "id",
+            "taille": null,
+            "onTable": true,
+            "align": "left",
+            "required": true,
+            "rules": null
+        },
+        "nom": {
+            "col": "nom",
+            "label": "Nom",
+            "type": "string",
+            "taille": 191,
+            "onTable": true,
+            "align": "left",
+            "required": true,
+            "rules": "required|max:191|string"
+        },
+        "groupe": {
+            "col": "groupe",
+            "label": "Groupe",
+            "type": "string",
+            "taille": 191,
+            "onTable": true,
+            "align": "left",
+            "required": true,
+            "rules": "required|max:191|string"
+        },
+        "icone": {
+            "col": "icone",
+            "label": "Icone",
+            "type": "file",
+            "taille": 50,
+            "onTable": true,
+            "align": "center",
+            "required": true,
+            "rules": ""
+        }
+    }
+}
