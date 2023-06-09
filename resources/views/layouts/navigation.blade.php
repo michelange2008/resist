@@ -13,11 +13,16 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        @lang('commun.accueil')
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        @lang('commun.add_saisie')
+                    </x-nav-link>
+                </div>
+                <x-dropdown-perso :menu="\Storage::json('public/json/menu-items.json')"></x-dropdown-perso>            
             </div>
-            <x-dropdown-perso :menu="\Storage::json('public/json/menu-items.json')"></x-dropdown-perso>            
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">

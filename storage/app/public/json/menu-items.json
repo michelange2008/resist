@@ -4,9 +4,21 @@
         "url": "items"
     },
     "sousmenus": {
-        "accessible": {
+        "espece": {
             "intitule": "Espèces",
             "url": "Espece"
+        },
+        "production": {
+            "intitule": "Types de production",
+            "url": "Production"
+        },
+        "molecule": {
+            "intitule": "Molécules anthelmintiques",
+            "url": "Molecule"
+        },
+        "anthelm": {
+            "intitule": "Médicaments anthelmintiques",
+            "url": "Anthelm"
         }
     }
 }

@@ -24,12 +24,19 @@
                             @elseif ($col['type'] == 'date')
                                 <td class="p-2 border-2 text-{{ $col['align'] }}">
                                     {{ date('d/m/Y', strtotime($item->$field)) }} </td>
-                            @elseif ($col['type'] = 'file')
+                            @elseif ($col['type'] == 'file')
                                 <td class="p-2 border-2">
                                     <div class="flex justify-{{ $col['align'] }}">
                                         <img class="w-8" src="{{ url('storage/img/' . $item->$field) }}"
                                             alt="{{ $item->$field }}">
                                     </div>
+                                </td>
+                            @elseif($col['type'] == 'belongsToMany')
+                                <td class="p-2 border-2">
+                                    @foreach ($item->{$col['belongsToMany']} as $relative)
+                                    {{ $relative->{$col['btm_col']} }}
+                                    @if (!$loop->last), @endif
+                                    @endforeach
                                 </td>
                             @else
                                 <td class="p-2 border-2 text-{{ $col['align'] }}">{{ $item->$field }} </td>

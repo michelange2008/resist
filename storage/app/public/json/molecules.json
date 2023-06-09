@@ -1,0 +1,57 @@
+{
+    "nom": "Molécules anthelmintiques",
+    "model": "Molecule",
+    "icone": "molecule.svg",
+    "orderBy": "nom",
+    "show": false,
+    "edit": true,
+    "cols": {
+        "id": {
+            "type": "id",
+            "label": "Id",
+            "coltable": "id",
+            "align": "center",
+            "onTable": false,
+            "required": true,
+            "rules": ""
+        },
+        "nom": {
+            "type": "string",
+            "label": "Nom",
+            "coltable": "nom",
+            "align": "left",
+            "onTable": true,
+            "required": true,
+            "rules": "string|max:191"
+        },
+        "famille": {
+            "type": "string",
+            "label": "Famille d'anthelminthiques",
+            "coltable": "famille",
+            "align": "left",
+            "onTable": true,
+            "required": true,
+            "rules": "string|max:191"
+        },
+        "sousfamille": {
+            "type": "string",
+            "label": "Sous-famille",
+            "coltable": "sousfamille",
+            "align": "left",
+            "onTable": true,
+            "required": true,
+            "rules": "string|max:191"
+        },
+        "anthelms": {
+            "type": "belongsToMany",
+            "label": "Médicaments",
+            "belongsToMany": "anthelms",
+            "btm_col": "nom",
+            "align": "left",
+            "onTable": true,
+            "required": false,
+            "rules": ""
+        }
+
+    }
+}

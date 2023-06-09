@@ -27,7 +27,7 @@ class ItemsFactory extends Component
         $this->cols = $this->infosModel['cols'];
         $this->show = $this->infosModel['show'];
         $this->modelWithPath = 'App\\Models\\'.$model;
-        $this->items = $this->modelWithPath::all();
+        $this->items = $this->modelWithPath::orderBy($this->infosModel['orderBy'])->get();
 
     }
     public function render()

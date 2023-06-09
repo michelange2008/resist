@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1200pt"
+   height="1200pt"
+   version="1.1"
+   viewBox="0 0 1200 1200"
+   id="svg16"
+   sodipodi:docname="lait.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs20" />
+  <sodipodi:namedview
+     id="namedview18"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="pt"
+     showgrid="false"
+     inkscape:zoom="0.47375"
+     inkscape:cx="800"
+     inkscape:cy="803.16623"
+     inkscape:window-width="1920"
+     inkscape:window-height="1024"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg16" />
+  <g
+     id="g14"
+     style="fill:#0000ff">
+    <path
+       d="m318.75 1050h562.5v75h-562.5z"
+       id="path2"
+       style="fill:#0000ff" />
+    <path
+       d="m750 131.25h18.75v-29.738l-26.512-26.512h-284.48l-26.512 26.512v29.738z"
+       id="path4"
+       style="fill:#0000ff" />
+    <path
+       d="m417.99 369.51-24.242-24.246-67.238 67.238h546.98l-67.238-67.238-24.242 24.242-26.516-26.512 24.246-24.242-42.992-42.992h-0.003906c-3.5156-3.5156-5.4922-8.2852-5.4922-13.258v-93.75h-262.5v93.75c0 4.9727-1.9766 9.7422-5.4922 13.258l-42.996 42.992 24.242 24.242z"
+       id="path6"
+       style="fill:#0000ff" />
+    <path
+       d="m356.25 450h487.5v562.5h-487.5z"
+       id="path8"
+       style="fill:#0000ff" />
+    <path
+       d="m806.25 292.24 42.992-42.992 26.516 26.516-42.992 42.992z"
+       id="path10"
+       style="fill:#0000ff" />
+    <path
+       d="m324.24 275.76 26.516-26.516 42.992 42.992-26.516 26.516z"
+       id="path12"
+       style="fill:#0000ff" />
+  </g>
+</svg>

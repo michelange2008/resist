@@ -1,0 +1,47 @@
+{
+    "nom": "Médicaments anthelmintiques",
+    "model": "Anthelm",
+    "icone": "anthelm.svg",
+    "orderBy": "nom",
+    "show": true,
+    "edit": true,
+    "cols": {
+        "id": {
+            "type": "id",
+            "label": "Id",
+            "coltable": "id",
+            "align": "center",
+            "onTable": false,
+            "required": true,
+            "rules": ""
+        },
+        "nom": {
+            "type": "string",
+            "label": "Nom",
+            "coltable": "nom",
+            "align": "left",
+            "onTable": true,
+            "required": true,
+            "rules": "string|max:191"
+        },
+        "laboratoire": {
+            "type": "string",
+            "label": "Laboratoire",
+            "coltable": "famille",
+            "align": "left",
+            "onTable": true,
+            "required": true,
+            "rules": "string|max:191"
+        },
+        "molecules": {
+            "type": "belongsToMany",
+            "label": "Molécules",
+            "belongsToMany": "molecules",
+            "btm_col": "nom",
+            "align": "left",
+            "onTable": true,
+            "required": false,
+            "rules": ""
+        }
+    }
+}

@@ -5,11 +5,11 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use JeroenZwart\CsvSeeder\CsvSeeder;
 
-class TemplateTableSeeder extends CsvSeeder
+class MoleculesTableSeeder extends CsvSeeder
 {
     public function __construct()
     {
-        $this->file = '/database/seeders/csvs/.csv';
+        $this->file = '/database/seeders/csvs/molecules.csv';
         $this->timestamps = false;
     }
     /**
