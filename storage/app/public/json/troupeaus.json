@@ -1,0 +1,78 @@
+{
+    "nom": "Troupeaux",
+    "model": "Troupeau",
+    "icone": "troupeaux.svg",
+    "orderBy": "id",
+    "show": false,
+    "add": true,
+    "edit": true,
+    "cols": {
+        "id": {
+            "col": "id",
+            "label": "Id",
+            "type": "id",
+            "taille": null,
+            "search" : false,
+            "onTable": false,
+            "align": "left",
+            "required": true,
+            "rules": null
+        },
+        "ferme": {
+            "type": "select",
+            "col": "ferme_id",
+            "belongsTo": "ferme",
+            "bt_table": "fermes",
+            "bt_col": "nom",
+            "bt_type": "string",
+            "bt_options": [],
+            "label": "Ferme",
+            "align": "left",
+            "search" : false,
+            "onTable": true,
+            "required": false,
+            "rules": ""
+        },
+        "espece": {
+            "type": "select",
+            "col": "espece_id",
+            "belongsTo": "espece",
+            "bt_table": "especes",
+            "bt_col": "icone",
+            "bt_type": "img",
+            "bt_options": [],
+            "label": "Espece",
+            "align": "left",
+            "search" : false,
+            "onTable": true,
+            "required": false,
+            "rules": ""
+        },
+        "production": {
+            "type": "select",
+            "col": "production_id",
+            "belongsTo": "production",
+            "bt_table": "productions",
+            "bt_col": "icone",
+            "bt_type": "img",
+            "bt_options": [],
+            "label": "Production",
+            "align": "left",
+            "search" : false,
+            "onTable": true,
+            "required": false,
+            "rules": ""
+        },
+        "effectif": {
+            "type": "number",
+            "label": "Effectif",
+            "col": "effectif",
+            "align": "center",
+            "search" : false,
+            "onTable": true,
+            "required": true,
+            "rules": "number"
+        }
+
+    }
+}

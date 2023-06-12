@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Espece extends Model
 {
@@ -11,4 +12,8 @@ class Espece extends Model
     public $timestamps = false;
     protected $guarded = [];
 
+    public function troupeaus(): HasMany
+    {
+        return $this->hasMany(Troupeau::class);
+    }
 }

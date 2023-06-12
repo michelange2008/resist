@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Anthelm extends Model
 {
@@ -11,7 +12,7 @@ class Anthelm extends Model
     public $timestamps = false;
     protected $guarded = [];
 
-    public function molecules()
+    public function molecules(): BelongsToMany
     {
         return $this->belongsToMany(Molecule::class);
     }

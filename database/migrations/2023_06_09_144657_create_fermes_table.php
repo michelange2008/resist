@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nom', 191);
             $table->string('email', 191)->unique();
-            $table->unsignedInteger('ede')->unique();
-            $table->string('adresse', 191);
+            $table->unsignedInteger('ede')->default(null);
+            $table->boolean('isBio')->default(false);
+            $table->string('adresse', 191)->nullable();
             $table->foreignId('commune_id')->constrained();
             $table->decimal('latitude', 8, 6)->nullable();
             $table->decimal('longitude', 9, 6)->nullable();

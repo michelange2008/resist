@@ -15,9 +15,9 @@ return new class extends Migration
 
             $table->id();
             $table->string('Commune', 191);
-            $table->string('Codepos', 10);
+            $table->string('Codepos', 10)->nullable();
             $table->string('Departement', 191);
-            $table->strint('INSEE')->unique();
+            $table->unsignedBigInteger('INSEE')->unique();
             
         });
     }

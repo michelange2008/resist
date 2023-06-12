@@ -4,7 +4,7 @@
     "icone": "especes.svg",
     "orderBy": "nom",
     "add": true,
-    "show": true,
+    "show": false,
 
     "cols": {
         "id": {
@@ -12,7 +12,8 @@
             "label": "Id",
             "type": "id",
             "taille": null,
-            "onTable": true,
+            "search" : false,
+            "onTable": false,
             "align": "left",
             "required": true,
             "rules": null
@@ -22,6 +23,7 @@
             "label": "Nom",
             "type": "string",
             "taille": 191,
+            "search" : true,
             "onTable": true,
             "align": "left",
             "required": true,
@@ -32,6 +34,7 @@
             "label": "Groupe",
             "type": "string",
             "taille": 191,
+            "search" : true,
             "onTable": true,
             "align": "left",
             "required": true,
@@ -42,6 +45,7 @@
             "label": "Icone",
             "type": "file",
             "taille": 50,
+            "search" : false,
             "onTable": true,
             "align": "center",
             "required": true,

@@ -8,6 +8,21 @@
             "intitule": "Espèces",
             "url": "Espece"
         },
+        "production": {
+            "intitule": "Types de production",
+            "url": "Production"
+        },
+        "medicaments" : {
+            "intitule": "hr"
+        },
+        "molecule": {
+            "intitule": "Molécules anthelminthiques",
+            "url": "Molecule"
+        },
+        "anthelm": {
+            "intitule": "Médicaments anthelminthiques",
+            "url": "Anthelm"
+        },
         "voie": {
             "intitule": "Voies d'administration",
             "url": "Voie"
@@ -16,17 +31,12 @@
             "intitule": "Unités",
             "url": "Unite"
         },
-        "production": {
-            "intitule": "Types de production",
-            "url": "Production"
+        "fermes" : {
+            "intitule": "hr"
         },
-        "molecule": {
-            "intitule": "Molécules anthelmintiques",
-            "url": "Molecule"
-        },
-        "anthelm": {
-            "intitule": "Médicaments anthelmintiques",
-            "url": "Anthelm"
+        "troupeau": {
+            "intitule": "Troupeaux",
+            "url": "Troupeau"
         }
     }
 }

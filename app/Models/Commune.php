@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Commune extends Model
 {
     use HasFactory;
     public $timestamps = false;
     
-    function fermes() {
-        return $this->hasMany(Ferme::class);
+    function fermes(): HasMany
+    {
+        return $this->hasMany(Ferme::class, 'Commune_id', 'INSEE');
     }
 }

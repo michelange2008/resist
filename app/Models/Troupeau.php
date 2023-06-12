@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Troupeau extends Model
 {
@@ -11,15 +12,18 @@ class Troupeau extends Model
     public $timestamps = false;
     protected $guarded = [];
 
-    function ferme() {
+    function ferme(): BelongsTo
+    {
         return $this->belongsTo(Ferme::class);
     }
 
-    function espece() {
+    function espece(): BelongsTo
+    {
         return $this->belongsTo(Espece::class);
     }
 
-    function production() {
+    function production(): BelongsTo
+    {
         return $this->belongsTo(Production::class);
     }
 }

@@ -18,9 +18,13 @@
 
                     <x-slot name="content">
                         @foreach ($menu['sousmenus'] as $sousmenu)
-                            <x-dropdown-link :href="url($menu['menu']['url'].'/'.$sousmenu['url'])">
-                                {{ ucfirst($sousmenu['intitule']) }}
-                            </x-dropdown-link>
+                            @if ($sousmenu['intitule'] == 'hr')
+                                <hr>
+                            @else
+                                <x-dropdown-link :href="url($menu['menu']['url'] . '/' . $sousmenu['url'])">
+                                    {{ ucfirst($sousmenu['intitule']) }}
+                                </x-dropdown-link>
+                            @endif
                         @endforeach
 
 

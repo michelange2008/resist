@@ -4,7 +4,7 @@
     "icone": "voies.svg",
     "orderBy": "nom",
     "add": true,
-    "show": true,
+    "show": false,
 
     "cols": {
         "id": {
@@ -12,6 +12,7 @@
             "label": "Id",
             "type": "id",
             "taille": null,
+            "search" : false,
             "onTable": true,
             "align": "left",
             "required": true,
@@ -22,6 +23,7 @@
             "label": "Nom",
             "type": "string",
             "taille": 10,
+            "search" : true,
             "onTable": true,
             "align": "left",
             "required": true,
@@ -32,6 +34,7 @@
             "label": "Nom long",
             "type": "string",
             "taille": 191,
+            "search" : true,
             "onTable": true,
             "align": "left",
             "required": true,

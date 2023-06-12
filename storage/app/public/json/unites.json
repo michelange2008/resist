@@ -1,10 +1,10 @@
 {
-    "nom": "Especes",
-    "model": "Espece",
-    "icone": "especes.svg",
+    "nom": "Unités",
+    "model": "Unite",
+    "icone": "unites.svg",
     "orderBy": "nom",
     "add": true,
-    "show": true,
+    "show": false,
 
     "cols": {
         "id": {
@@ -12,7 +12,8 @@
             "label": "Id",
             "type": "id",
             "taille": null,
-            "onTable": true,
+            "search" : false,
+            "onTable": false,
             "align": "left",
             "required": true,
             "rules": null
@@ -22,6 +23,7 @@
             "label": "Nom",
             "type": "string",
             "taille": 191,
+            "search" : true,
             "onTable": true,
             "align": "left",
             "required": true,

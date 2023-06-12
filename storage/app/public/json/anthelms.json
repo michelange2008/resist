@@ -3,14 +3,16 @@
     "model": "Anthelm",
     "icone": "anthelm.svg",
     "orderBy": "nom",
-    "show": true,
+    "show": false,
+    "add": true,
     "edit": true,
     "cols": {
         "id": {
             "type": "id",
             "label": "Id",
-            "coltable": "id",
+            "col": "id",
             "align": "center",
+            "search" : false,
             "onTable": false,
             "required": true,
             "rules": ""
@@ -18,8 +20,9 @@
         "nom": {
             "type": "string",
             "label": "Nom",
-            "coltable": "nom",
+            "col": "nom",
             "align": "left",
+            "search" : true,
             "onTable": true,
             "required": true,
             "rules": "string|max:191"
@@ -27,8 +30,9 @@
         "laboratoire": {
             "type": "string",
             "label": "Laboratoire",
-            "coltable": "famille",
+            "col": "laboratoire",
             "align": "left",
+            "search" : true,
             "onTable": true,
             "required": true,
             "rules": "string|max:191"
@@ -39,6 +43,7 @@
             "belongsToMany": "molecules",
             "btm_col": "nom",
             "align": "left",
+            "search" : false,
             "onTable": true,
             "required": false,
             "rules": ""

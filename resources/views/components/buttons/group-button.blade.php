@@ -3,7 +3,7 @@
 ]) }}>
     @isset($updateMode)
         @if ($updateMode)
-            <x-buttons.success-button wire:click.prevent="update">
+            <x-buttons.success-button wire:click.prevent="update({{ $id }})">
                 <x-icones.edit></x-icones.edit> Mettre à jour
             </x-buttons.success-button>
             <x-buttons.reset-button x-on:click="show = !show" wire:click="cancel">

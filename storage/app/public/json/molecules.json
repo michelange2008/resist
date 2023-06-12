@@ -1,16 +1,18 @@
 {
-    "nom": "Molécules anthelmintiques",
+    "nom": "Molécules anthelminthiques",
     "model": "Molecule",
     "icone": "molecule.svg",
     "orderBy": "nom",
     "show": false,
+    "add": true,
     "edit": true,
     "cols": {
         "id": {
             "type": "id",
             "label": "Id",
-            "coltable": "id",
+            "col": "id",
             "align": "center",
+            "search" : false,
             "onTable": false,
             "required": true,
             "rules": ""
@@ -18,8 +20,9 @@
         "nom": {
             "type": "string",
             "label": "Nom",
-            "coltable": "nom",
+            "col": "nom",
             "align": "left",
+            "search" : true,
             "onTable": true,
             "required": true,
             "rules": "string|max:191"
@@ -27,8 +30,9 @@
         "famille": {
             "type": "string",
             "label": "Famille d'anthelminthiques",
-            "coltable": "famille",
+            "col": "famille",
             "align": "left",
+            "search" : true,
             "onTable": true,
             "required": true,
             "rules": "string|max:191"
@@ -36,8 +40,9 @@
         "sousfamille": {
             "type": "string",
             "label": "Sous-famille",
-            "coltable": "sousfamille",
+            "col": "sousfamille",
             "align": "left",
+            "search" : true,
             "onTable": true,
             "required": true,
             "rules": "string|max:191"
@@ -48,6 +53,7 @@
             "belongsToMany": "anthelms",
             "btm_col": "nom",
             "align": "left",
+            "search" : false,
             "onTable": true,
             "required": false,
             "rules": ""

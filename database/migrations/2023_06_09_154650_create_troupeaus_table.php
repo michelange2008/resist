@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('ferme_id')->constrained();
             $table->foreignId('espece_id')->constrained();
             $table->foreignId('production_id')->constrained();
-            $table->unsignedInteger('effectif');
+            $table->unsignedInteger('effectif')->default(null);
         });
     }
 
