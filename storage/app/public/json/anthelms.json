@@ -27,12 +27,17 @@
             "required": true,
             "rules": "string|max:191"
         },
-        "laboratoire": {
-            "type": "string",
+        "laboratoire_id": {
+            "type": "select",
             "label": "Laboratoire",
-            "col": "laboratoire",
-            "align": "left",
-            "search" : true,
+            "col": "laboratoire_id",
+            "belongsTo": "laboratoire",
+            "bt_table": "laboratoires",
+            "bt_col": "nom",
+            "bt_type": "text",
+            "bt_options": [],
+           "align": "left",
+            "search" : false,
             "onTable": true,
             "required": true,
             "rules": "string|max:191"
@@ -41,7 +46,9 @@
             "type": "belongsToMany",
             "label": "Molécules",
             "belongsToMany": "molecules",
+            "btm_table": "molecules",
             "btm_col": "nom",
+            "btm_options": [],
             "align": "left",
             "search" : false,
             "onTable": true,

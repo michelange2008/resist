@@ -13,7 +13,7 @@
                     @foreach ($cols as $col => $champ)
                         @if ($champ['type'] == 'select')
                             <p><span class="italic text-gray-600">{{ $champ['label'] }}: </span><span
-                                    class="font-bold">{{ $item->{$champ['belongsTo']}->{$champ['coltable']} ?? ' - ' }}</span>
+                                    class="font-bold">{{ $item->{$champ['belongsTo']}->{$champ['bt_col']} ?? ' - ' }}</span>
                             </p>
                         @elseif ($champ['type'] == 'date')
                             <p><span class="italic text-gray-600">{{ $champ['label'] }}: </span> <span
@@ -60,7 +60,30 @@
 
                     {{-- @elseif ($champ['type'] == 'number') --}}
                 @elseif ($champ['type'] == 'belongsToMany')
+                    @isset($item)
+                        <label for="">{{ $champ['label'] }}</label>
+                        <div class="flex flex-col gap-2 px-4">
 
+                            @foreach ($champ['btm_options'] as $id => $btm)
+                                <div class="flex flex-row gap-2">
+                                    @if ($item->{$champ['belongsToMany']}->get($id) != null)
+                                        
+                                    {{$item->{$champ['belongsToMany']}->get($id)->nom}}
+                                    @endif
+                                    {{-- @foreach ($item->{$champ['belongsToMany']} as $hasBtm)
+                                        @if ($hasBtm->{$champ['btm_col']} == $btm)
+                                            @php $checked = 'checked' @endphp
+                                        @else
+                                            @php $checked = "" @endphp
+                                        @endif
+                                    @endforeach
+                                    <input type="checkbox" {{$checked}}
+                                        wire:change="addBtm({{ $item->id }}, '{{ $champ['belongsToMany'] }}', {{ $id }})">
+                                    {{ $btm }} --}}
+                                </div>
+                            @endforeach
+                        </div>
+                    @endisset
                 @elseif ($champ['type'] == 'password')
                 @else
                     <x-forms.input-text :type="$champ['type']" :label="$champ['label']" :field="$champ['col']"></x-forms.input-text>

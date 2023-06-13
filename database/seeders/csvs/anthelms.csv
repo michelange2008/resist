@@ -1,16 +1,16 @@
-id;nom;laboratoire
-1;EPRINEX MULTI 5 mg/ml pour on;Boehringer Ingelheim
-2;EPRECIS 20mg/ml injectable;Ceva
-3;SEPONVER;Elanco
-4;SUPAVERM;Elanco
-5;IVOMEC;Boehringer Ingelheim
-6;IVOMEC OVIN;Boehringer Ingelheim
-7;ORAMEC OVIN;Boehringer Ingelheim
-8;DECTOMAX 10 MG/ML;Zoetis
-9;PANACUR 2,5%;Intervet
-10;PANACUR 10%;Intervet
-11;VALBAZEN 1,9%;Zoetis
-12;VALBAZEN 5%;Zoetis
-13;ZOLVIX 25 mg/ml;Elanco
-14;OXFENYL 2,265%;Virbac
-15;OXFENYL 9,06%;Virbac
+id;nom;laboratoire_id
+1;EPRINEX MULTI 5 mg/ml pour on;1
+2;EPRECIS 20mg/ml injectable;2
+3;SEPONVER;3
+4;SUPAVERM;3
+5;IVOMEC;1
+6;IVOMEC OVIN;1
+7;ORAMEC OVIN;1
+8;DECTOMAX 10 MG/ML;4
+9;PANACUR 2,5%;5
+10;PANACUR 10%;5
+11;VALBAZEN 1,9%;4
+12;VALBAZEN 5%;4
+13;ZOLVIX 25 mg/ml;3
+14;OXFENYL 2,265%;6
+15;OXFENYL 9,06%;6

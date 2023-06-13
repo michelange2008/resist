@@ -31,6 +31,7 @@ class ItemsFactory extends Component
     public bool $toShow = false;
     public $items;
     public $item;
+    public $btm_list = [];
 
     protected array $rules = [];
 
@@ -47,16 +48,24 @@ class ItemsFactory extends Component
         $this->add = $this->infosModel['add']; // Détermine s'il faut afficher le bouton pour ajouter un item
         $this->cols = $this->infosModel['cols']; // Liste des colonnes de la table correspondant au model
 
+        $this->items = $this->getItems(); // récupère les items en tenant compte d'un éventuel champs de recherche
+
         foreach ($this->cols as $key => $col) {
             if ($col['type'] == "select") {
                 $bt_items = DB::table($col['bt_table'])->select('id', $col['bt_col'])->get();
                 foreach ($bt_items as $row) {
                     $this->cols[$key]['bt_options'][$row->id] = $row->{$col['bt_col']};
                 }
+            } elseif ($col['type'] == "belongsToMany") {
+                $btm_items = DB::table($col['btm_table'])->select('id', $col['btm_col'])->get();
+
+                foreach ($btm_items as $row) {
+
+                    $this->cols[$key]['btm_options'][$row->id] = $row->{$col['btm_col']};
+                }
             }
         }
-        $this->items = $this->getItems(); // récupère les items en tenant compte d'un éventuel champs de recherche
-
+        // dd('');
     }
 
     /**
@@ -143,6 +152,16 @@ class ItemsFactory extends Component
         $this->change = false;
 
         $this->items = $this->getItems();
+    }
+
+    function addBtm($item_id, $btm, $id)
+    {
+        $btm_list[] = $id;
+        $item = $this->modelWithPath::find($item_id);
+        $item->molecules()->attach($id);
+
+        $this->cancel();
+        $this->change = false;
     }
 
     public function cancel()
