@@ -31,7 +31,6 @@ class ItemsFactory extends Component
     public bool $toShow = false;
     public $items;
     public $item;
-    public $btm_list = [];
 
     protected array $rules = [];
 
@@ -65,7 +64,6 @@ class ItemsFactory extends Component
                 }
             }
         }
-        // dd('');
     }
 
     /**
@@ -154,14 +152,28 @@ class ItemsFactory extends Component
         $this->items = $this->getItems();
     }
 
-    function addBtm($item_id, $btm, $id)
+    /**
+     * Permet d'ajouter ou d'enlever un élément d'une relation BelongsToMany
+     * Par exemple liste des molécules (Molecule) associées à un anthelminthique (Anthelm)
+     *
+     * @param [type] $btms nom de la méthode dans la relation BelongsToMany (ex. molecules) 
+     * @param [type] $item_id permet de retrouver l'item concerné et donc la liste des 
+     * associations dans la relation belongsToMany (ex. 3 qui l'id du SEPONVER)
+     * @param [type] $btm_id (ex. 1 qui est l'id du lévamisole si on veut ajouter le lévamisole au SEPONVER)
+     * @return void
+     */
+    function toggleBtm($btms, $item_id, $btm_id)
     {
-        $btm_list[] = $id;
-        $item = $this->modelWithPath::find($item_id);
-        $item->molecules()->attach($id);
 
-        $this->cancel();
-        $this->change = false;
+        $this->item = $this->modelWithPath::find($item_id);
+
+        foreach ($this->item->{$btms} as $btm) {
+            if ($btm->id == $btm_id) {  // Si l'id que l'on veut modifier est présent dans la table
+                $this->item->{$btms}()->detach($btm_id); // On l'enlève de la table pivot
+            } else {
+                $this->item->{$btms}()->attach($btm_id); // Sinon on l'ajoute à la table pivot
+            }
+        }
     }
 
     public function cancel()

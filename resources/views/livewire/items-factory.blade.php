@@ -66,21 +66,14 @@
 
                             @foreach ($champ['btm_options'] as $id => $btm)
                                 <div class="flex flex-row gap-2">
-                                    @if ($item->{$champ['belongsToMany']}->get($id) != null)
-                                        
-                                    {{$item->{$champ['belongsToMany']}->get($id)->nom}}
-                                    @endif
-                                    {{-- @foreach ($item->{$champ['belongsToMany']} as $hasBtm)
-                                        @if ($hasBtm->{$champ['btm_col']} == $btm)
-                                            @php $checked = 'checked' @endphp
-                                        @else
-                                            @php $checked = "" @endphp
-                                        @endif
-                                    @endforeach
-                                    <input type="checkbox" {{$checked}}
-                                        wire:change="addBtm({{ $item->id }}, '{{ $champ['belongsToMany'] }}', {{ $id }})">
-                                    {{ $btm }} --}}
-                                </div>
+                                    <input type="checkbox"
+                                        @foreach ($item->{$champ['btm_table']} as $value)
+                                            @if ($value->{$champ['btm_col']} == $btm)
+                                                checked
+                                            @endif 
+                                            @endforeach
+                                            wire:change="toggleBtm( '{{ $champ['belongsToMany']}}', {{ $item->id }}, {{ $id }})">
+                                        {{ $btm }} </div>
                             @endforeach
                         </div>
                     @endisset

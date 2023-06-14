@@ -47,6 +47,7 @@
             "label": "Molécules",
             "belongsToMany": "molecules",
             "btm_table": "molecules",
+            "btm_pivot_col" : "molecule_id",
             "btm_col": "nom",
             "btm_options": [],
             "align": "left",
