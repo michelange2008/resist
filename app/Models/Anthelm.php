@@ -18,6 +18,11 @@ class Anthelm extends Model
         return $this->belongsToMany(Molecule::class);
     }
 
+    public function especes(): BelongsToMany
+    {
+        return $this->belongsToMany(Espece::class);
+    }
+
     function laboratoire(): BelongsTo
     {
         return $this->belongsTo(Laboratoire::class);    

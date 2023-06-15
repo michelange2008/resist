@@ -25,6 +25,7 @@ class ItemsFactory extends Component
     public $columns;
     public $show;
     public $add;
+    public $orderBy;
     public $search;
     public bool $change = false;
     public bool $updateMode = false;
@@ -45,6 +46,7 @@ class ItemsFactory extends Component
         $this->iconeModel = $this->infosModel['icone']; // Icone de la ligne de titre
         $this->show = $this->infosModel['show']; // Détermine s'il faut afficher une colonne cliquable pour afficher les détails d'un item
         $this->add = $this->infosModel['add']; // Détermine s'il faut afficher le bouton pour ajouter un item
+        $this->orderBy = $this->infosModel['orderBy']; // Détermine s'il faut afficher le bouton pour ajouter un item
         $this->cols = $this->infosModel['cols']; // Liste des colonnes de la table correspondant au model
 
         $this->items = $this->getItems(); // récupère les items en tenant compte d'un éventuel champs de recherche
@@ -56,7 +58,7 @@ class ItemsFactory extends Component
                     $this->cols[$key]['bt_options'][$row->id] = $row->{$col['bt_col']};
                 }
             } elseif ($col['type'] == "belongsToMany") {
-                $btm_items = DB::table($col['btm_table'])->select('id', $col['btm_col'])->get();
+                $btm_items = DB::table($col['btm_table'])->select('id', $col['btm_col'])->orderBy($col['btm_col'])->get();
 
                 foreach ($btm_items as $row) {
 
@@ -78,7 +80,7 @@ class ItemsFactory extends Component
                 if ($field['search']) {
                     $query->orWhere($field['col'], 'like', '%' . $this->search . '%');
                 }
-        })->get();
+        })->orderBy($this->orderBy)->get();
 
         return $liste;
     }
@@ -164,16 +166,32 @@ class ItemsFactory extends Component
      */
     function toggleBtm($btms, $item_id, $btm_id)
     {
+        $btm_list = collect();
 
         $this->item = $this->modelWithPath::find($item_id);
-
-        foreach ($this->item->{$btms} as $btm) {
-            if ($btm->id == $btm_id) {  // Si l'id que l'on veut modifier est présent dans la table
-                $this->item->{$btms}()->detach($btm_id); // On l'enlève de la table pivot
-            } else {
-                $this->item->{$btms}()->attach($btm_id); // Sinon on l'ajoute à la table pivot
+        if ($this->item->{$btms} != null) {
+            foreach ($this->item->{$btms} as $btm) {
+                $btm_list->push($btm->id);
             }
         }
+        $btm_list = $btm_list->unique();
+        if ($btm_list->contains($btm_id)) {
+            $btm_list->forget(array_search($btm_id, $btm_list->toArray()));
+        } else {
+            $btm_list->push($btm_id);
+        }
+
+        $this->item->{$btms}()->detach();
+        foreach ($btm_list as $btm_id) {
+            $this->item->{$btms}()->attach($btm_id);
+        }
+
+        // if ($btm->id == $btm_id) {  // Si l'id que l'on veut modifier est présent dans la table
+        //     dump('detach: ' . $btm_id . ' - ' . $btm->id . ' - ' . $btm->nom);
+        // } else {
+        //     dump('attach: ' . $btm_id . ' - ' . $btm->id . ' - ' . $btm->nom);
+        //     $this->item->{$btms}()->attach($btm_id); // Sinon on l'ajoute à la table pivot
+        // }
     }
 
     public function cancel()

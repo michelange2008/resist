@@ -33,10 +33,14 @@
                                 </td>
                             @elseif($col['type'] == 'belongsToMany')
                                 <td class="p-2 border-2">
-                                    @foreach ($item->{$col['belongsToMany']} as $relative)
-                                    {{ $relative->{$col['btm_col']} }}
-                                    @if (!$loop->last), @endif
-                                    @endforeach
+                                    @if ($item->{$col['belongsToMany']} != null)
+                                        @foreach ($item->{$col['belongsToMany']} as $relative)
+                                            {{ $relative->{$col['btm_col']} }}
+                                            @if (!$loop->last)
+                                                ,
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </td>
                             @else
                                 <td class="p-2 border-2 text-{{ $col['align'] }}">{{ $item->$field }} </td>

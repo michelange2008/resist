@@ -55,6 +55,20 @@
             "onTable": true,
             "required": false,
             "rules": ""
+        },
+        "especes": {
+            "type": "belongsToMany",
+            "label": "Espèces",
+            "belongsToMany": "especes",
+            "btm_table": "especes",
+            "btm_pivot_col" : "espece_id",
+            "btm_col": "nom",
+            "btm_options": [],
+            "align": "left",
+            "search" : false,
+            "onTable": true,
+            "required": false,
+            "rules": ""
         }
     }
 }
