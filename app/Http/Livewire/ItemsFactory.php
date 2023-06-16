@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
+use App\Traits\HydrateValuesModelsRelationship;
+
 class ItemsFactory extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, HydrateValuesModelsRelationship;
 
     public $model;
     public $table;
@@ -51,21 +53,8 @@ class ItemsFactory extends Component
 
         $this->items = $this->getItems(); // récupère les items en tenant compte d'un éventuel champs de recherche
 
-        foreach ($this->cols as $key => $col) {
-            if ($col['type'] == "select") {
-                $bt_items = DB::table($col['bt_table'])->select('id', $col['bt_col'])->get();
-                foreach ($bt_items as $row) {
-                    $this->cols[$key]['bt_options'][$row->id] = $row->{$col['bt_col']};
-                }
-            } elseif ($col['type'] == "belongsToMany") {
-                $btm_items = DB::table($col['btm_table'])->select('id', $col['btm_col'])->orderBy($col['btm_col'])->get();
+        $this->cols = $this->hydrateValues($this->cols); // Ajoute les valeurs des models liés par relations belongsTo...
 
-                foreach ($btm_items as $row) {
-
-                    $this->cols[$key]['btm_options'][$row->id] = $row->{$col['btm_col']};
-                }
-            }
-        }
     }
 
     /**
@@ -166,32 +155,25 @@ class ItemsFactory extends Component
      */
     function toggleBtm($btms, $item_id, $btm_id)
     {
-        $btm_list = collect();
+        $btm_list = collect(); // Liste des items associés (ex: molécules pour un vermifuge)
 
-        $this->item = $this->modelWithPath::find($item_id);
+        $this->item = $this->modelWithPath::find($item_id); // On recherche le vermifuge
         if ($this->item->{$btms} != null) {
             foreach ($this->item->{$btms} as $btm) {
-                $btm_list->push($btm->id);
+                $btm_list->push($btm->id); // Et on ajoute dans la liste les molécules présentes dans ce vermifuge
             }
         }
-        $btm_list = $btm_list->unique();
-        if ($btm_list->contains($btm_id)) {
-            $btm_list->forget(array_search($btm_id, $btm_list->toArray()));
+        $btm_list = $btm_list->unique(); // On enlève d'éventuels doublons 
+        if ($btm_list->contains($btm_id)) { // Si la molécules sur laquelle on a cliqué est déjà présente dans la liste
+            $btm_list->forget(array_search($btm_id, $btm_list->toArray())); // On l'enlève
         } else {
-            $btm_list->push($btm_id);
+            $btm_list->push($btm_id); // Sinon on l'ajoute
         }
 
-        $this->item->{$btms}()->detach();
+        $this->item->{$btms}()->detach(); // On vide les associations
         foreach ($btm_list as $btm_id) {
-            $this->item->{$btms}()->attach($btm_id);
+            $this->item->{$btms}()->attach($btm_id); // et on les reremplit avec la liste qui vient d’être faire
         }
-
-        // if ($btm->id == $btm_id) {  // Si l'id que l'on veut modifier est présent dans la table
-        //     dump('detach: ' . $btm_id . ' - ' . $btm->id . ' - ' . $btm->nom);
-        // } else {
-        //     dump('attach: ' . $btm_id . ' - ' . $btm->id . ' - ' . $btm->nom);
-        //     $this->item->{$btms}()->attach($btm_id); // Sinon on l'ajoute à la table pivot
-        // }
     }
 
     public function cancel()

@@ -75,6 +75,18 @@
                                         wire:change="toggleBtm( '{{ $champ['belongsToMany']}}', {{ $item->id }}, {{ $id }})">
                                     {{ $btm }} 
                                 </div>
+                                <div class="grid grid-cols-5 gap-2">
+                                    @if ($champ['hasValues'])
+                                        @foreach ($champ['btm_values'] as $btm_value)
+                                            @if ($btm_value['type'] == "select") 
+                    <x-forms.select :label="$btm_value['label']" :field="$btm_value['col']" :options="$btm_value['bt_options']"></x-forms.select>
+                                            @elseif ($btm_value['type'] == "number")
+                                            <x-forms.input-text :type="$btm_value['type']" :label="$btm_value['label']" :field="$btm_value['col']"></x-forms.input-text>
+
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </div>
                             @endforeach
                         </div>
                     @endisset
