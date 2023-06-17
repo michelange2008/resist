@@ -50,20 +50,16 @@
 
                     @if ($show)
                         <td class="p-2 border-2 text-center">
-                            <button>
                                 <x-buttons.see-small-button x-on:click="see = true"
                                     wire:click.prevent="show({{ $item->id }})">
                                 </x-buttons.see-small-button>
-                            </button>
                         </td>
                     @endif
 
                     <td class="p-2 border-2 text-center">
-                        <button>
                             <x-buttons.edit-small-button x-on:click="show = !show, see = false"
                                 wire:click.prevent="edit({{ $item->id }})">
                             </x-buttons.edit-small-button>
-                        </button>
                     </td>
                     <td class="p-2 border-2 text-center ">
                         <x-buttons.del-small-button

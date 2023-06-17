@@ -1,4 +1,4 @@
-<div class="mx-1 md:mx-4 lg:mx-8 xl:mx-12" x-data="{ show: @entangle('change'), update: @entangle('updateMode'), see: @entangle('toShow') }" @click.outside="see = false">
+<div class="mx-1 md:mx-4 lg:mx-8 xl:mx-12" x-data="{ show: @entangle('change'), update: @entangle('updateMode'), see: @entangle('toShow') }" @click.outside="see = false" x-trap.noscroll="show">
 
     <x-titres.titre :icone="$iconeModel">{{ $titre }}</x-titres.titre>
 
@@ -44,62 +44,79 @@
         <form>
             <x-titres.group-titre :updateMode="$updateMode"></x-titres.group-titre>
 
-            @foreach ($cols as $champ)
-                @if ($champ['type'] == 'select')
-                    <x-forms.select :label="$champ['label']" :field="$champ['col']" :options="$champ['bt_options']"></x-forms.select>
-                @elseif ($champ['type'] == 'textarea')
+            <div class="" x-data="{ values: '' }">
 
-                @elseif ($champ['type'] == 'checkbox')
+                @foreach ($cols as $champ)
+                    @if ($champ['type'] == 'select')
+                        <x-forms.select :label="$champ['label']" :field="$champ['col']" :options="$champ['bt_options']"></x-forms.select>
+                    @elseif ($champ['type'] == 'textarea')
 
-                @elseif ($champ['type'] == 'id')
+                    @elseif ($champ['type'] == 'checkbox')
 
-                @elseif ($champ['type'] == 'radio')
+                    @elseif ($champ['type'] == 'id')
 
-                @elseif ($champ['type'] == 'file')
-                    <x-forms.input-file :label="$champ['label']" :field="$champ['col']"></x-forms.input-file>
+                    @elseif ($champ['type'] == 'radio')
 
-                    {{-- @elseif ($champ['type'] == 'number') --}}
-                @elseif ($champ['type'] == 'belongsToMany')
-                    @isset($item)
-                        <label for="">{{ $champ['label'] }}</label>
-                        <div class="flex flex-col gap-2 px-4">
+                    @elseif ($champ['type'] == 'file')
+                        <x-forms.input-file :label="$champ['label']" :field="$champ['col']"></x-forms.input-file>
 
-                            @foreach ($champ['btm_options'] as $id => $btm)
-                                <div class="flex flex-row gap-2">
-                                    <input type="checkbox"
-                                    @if ($item->{$champ['btm_table']} != null)
-                                        @foreach ($item->{$champ['btm_table']} as $value)
-                                            @if ($value->{$champ['btm_col']} == $btm) checked @endif 
-                                        @endforeach
-                                    @endif
-                                        wire:change="toggleBtm( '{{ $champ['belongsToMany']}}', {{ $item->id }}, {{ $id }})">
-                                    {{ $btm }} 
-                                </div>
-                                <div class="grid grid-cols-5 gap-2">
-                                    @if ($champ['hasValues'])
+                        {{-- @elseif ($champ['type'] == 'number') --}}
+                    @elseif ($champ['type'] == 'belongsToMany')
+                        @isset($item)
+                            <label for="">{{ $champ['label'] }}</label>
+                            <div class="flex flex-col gap-2 px-4">
+
+                                @foreach ($champ['btm_options'] as $id => $btm)
+                                    <div class="flex flex-row gap-2">
+                                        <input type="checkbox"
+                                            @if ($item->{$champ['btm_table']} != null) @foreach ($item->{$champ['btm_table']} as $value)
+                                                @if ($value->{$champ['btm_col']} == $btm) checked @endif
+                                            @endforeach
+                                @endif
+                                wire:change="toggleBtm( '{{ $champ['belongsToMany'] }}', {{ $item->id }}, {{ $id }})">
+                                {{ $btm }}
+
+
+                                @if ($champ['hasValues'])
+
+                                    <x-buttons.edit-smallest-button x-on:click="values = {{ $id }}">
+                                    </x-buttons.edit-smallest-button>
+                            </div>
+                            <div>
+                                <div class="absolute top-20 m-auto w-1/3 p-5 bg-slate-400" x-show="values === {{ $id }}">
+                                    <h2 class="h2">{{ $btm  }}: Informations complémentaires</h2>
+                                    <div class="flex flex-col gap-2">
+    
                                         @foreach ($champ['btm_values'] as $btm_value)
-                                            @if ($btm_value['type'] == "select") 
-                    <x-forms.select :label="$btm_value['label']" :field="$btm_value['col']" :options="$btm_value['bt_options']"></x-forms.select>
-                                            @elseif ($btm_value['type'] == "number")
-                                            <x-forms.input-text :type="$btm_value['type']" :label="$btm_value['label']" :field="$btm_value['col']"></x-forms.input-text>
-
+                                            @if ($btm_value['type'] == 'select')
+                                                <x-forms.select :label="$btm_value['label']" :field="$btm_value['col']" :options="$btm_value['bt_options']">
+                                                </x-forms.select>
+                                            @elseif ($btm_value['type'] == 'number')
+                                                <x-forms.input-text :type="$btm_value['type']" :label="$btm_value['label']" :field="$btm_value['col']">
+                                                </x-forms.input-text>
+    
                                             @endif
                                         @endforeach
-                                    @endif
+                                    </div>
+                                    <x-buttons.lime-button>Enregistrer</x-buttons.lime-button>
                                 </div>
-                            @endforeach
-                        </div>
-                    @endisset
-                @elseif ($champ['type'] == 'password')
-                @else
-                    <x-forms.input-text :type="$champ['type']" :label="$champ['label']" :field="$champ['col']"></x-forms.input-text>
-                @endif
-            @endforeach
+                        @endif
+                </div>
+                @endforeach
+    </div>
+@endisset
+@elseif ($champ['type'] == 'password')
+@else
+<x-forms.input-text :type="$champ['type']" :label="$champ['label']" :field="$champ['col']"></x-forms.input-text>
+@endif
+@endforeach
+</div>
 
-            <x-buttons.group-button :updateMode="$updateMode" :id="$item->id ?? ''"></x-buttons.group-button>
 
-        </form>
+<x-buttons.group-button :updateMode="$updateMode" :id="$item->id ?? ''"></x-buttons.group-button>
 
-    </x-modal-custom>
+</form>
+
+</x-modal-custom>
 
 </div>
