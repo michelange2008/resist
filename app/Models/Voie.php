@@ -12,8 +12,4 @@ class Voie extends Model
     public $timestamps = false;
     protected $guarded = [];
 
-    public function anthelm_especes(): HasMany
-    {
-        return $this->hasMany(Anthelm_Espece::class);
-    }
 }

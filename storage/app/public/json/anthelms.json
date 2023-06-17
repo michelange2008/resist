@@ -3,7 +3,7 @@
     "model": "Anthelm",
     "icone": "anthelm.svg",
     "orderBy": "nom",
-    "show": false,
+    "show": true,
     "add": true,
     "edit": true,
     "cols": {
@@ -68,19 +68,14 @@
             "hasValues": true,
             "btm_values" : {
                 "voie": {
-                    "type": "select",
+                    "type": "text",
                     "label": "Voie",
-                    "col": "voie_id",
-                    "belongsTo": "voie",
-                    "bt_table": "voies",
-                    "bt_col": "nom",
-                    "bt_type": "text",
-                    "bt_options": [],
+                    "col": "voie",
                     "align": "left",
                     "search" : false,
                     "onTable": false,
                     "required": true,
-                    "rules": ""
+                    "rules": "string|max:2"
                 },
                 "posologie": {
                     "type": "number",
@@ -95,19 +90,14 @@
                     "rules": ""
                 },
                 "unite": {
-                    "type": "select",
+                    "type": "text",
                     "label": "Unité",
-                    "col": "unite_id",
-                    "belongsTo": "unite",
-                    "bt_table": "unites",
-                    "bt_col": "nom",
-                    "bt_type": "text",
-                    "bt_options": [],
+                    "col": "unite",
                     "align": "left",
                     "search" : false,
                     "onTable": false,
                     "required": true,
-                    "rules": ""
+                    "rules": "string|max:50"
                 },
                 "lait": {
                     "type": "number",

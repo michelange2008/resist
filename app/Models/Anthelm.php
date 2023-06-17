@@ -20,7 +20,7 @@ class Anthelm extends Model
 
     public function especes(): BelongsToMany
     {
-        return $this->belongsToMany(Espece::class);
+        return $this->belongsToMany(Espece::class)->withPivot('voie', 'posologie', 'unite', 'lait', 'viande');
     }
 
     function laboratoire(): BelongsTo

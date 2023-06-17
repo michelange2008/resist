@@ -10,11 +10,50 @@
             <x-titres.titre1 :icone="'detail.svg'">Détails</x-titres.titre1>
             <div class="p-3">
                 @isset($item)
+                    <div class="my-2">
+
                     @foreach ($cols as $col => $champ)
                         @if ($champ['type'] == 'select')
-                            <p><span class="italic text-gray-600">{{ $champ['label'] }}: </span><span
-                                    class="font-bold">{{ $item->{$champ['belongsTo']}->{$champ['bt_col']} ?? ' - ' }}</span>
+                            <p>
+                                <span class="italic text-gray-600">{{ $champ['label'] }}: </span>
+                                <span class="font-bold">
+                                    {{ $item->{$champ['belongsTo']}->{$champ['bt_col']} ?? ' - ' }}
+                                </span>
                             </p>
+                        @elseif ($champ['type'] == 'belongsToMany')
+                            <p><span class="italic text-gray-600">{{ $champ['label'] }}: </span></p>
+                            <div class="px-2">
+                                @foreach ($item->{$champ['belongsToMany']} as $btm)
+                                    <div class="my-1">
+
+                                        <span
+                                            class="font-bold ">{{ mb_convert_case($btm->{$champ['btm_col']}, MB_CASE_TITLE_SIMPLE) }}</span>
+                                        @if ($champ['hasValues'])
+                                            <table class="w-full border border-white">
+                                                <thead>
+                                                    @foreach ($champ['btm_values'] as $value)
+                                                        <th class="border border-white font-light italic">
+                                                            {{ $value['label'] }}</th>
+                                                    @endforeach
+
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+
+                                                        @foreach ($champ['btm_values'] as $value)
+                                                            <td class="border border-white text-center">
+                                                                {{ $btm->pivot->{$value['col']} }}
+                                                            </td>
+                                                        @endforeach
+                                                    </tr>
+
+                                                </tbody>
+
+                                            </table>
+                                        @endif
+                                    </div>
+                                @endforeach
+                            </div>
                         @elseif ($champ['type'] == 'date')
                             <p><span class="italic text-gray-600">{{ $champ['label'] }}: </span> <span
                                     class="font-bold">{{ date('d/m/Y', strtotime($item->$col)) }}</span> </p>
@@ -23,6 +62,7 @@
                                     class="font-bold">{{ $item->$col }}</span></p>
                         @endif
                     @endforeach
+                    </div>
                 @endisset
             </div>
         </div>
@@ -76,40 +116,15 @@
                                 wire:change="toggleBtm( '{{ $champ['belongsToMany'] }}', {{ $item->id }}, {{ $id }})">
                                 {{ $btm }}
 
-
-                                @if ($champ['hasValues'])
-
-                                    <x-buttons.edit-smallest-button x-on:click="values = {{ $id }}">
-                                    </x-buttons.edit-smallest-button>
                             </div>
-                            <div>
-                                <div class="absolute top-20 m-auto w-1/3 p-5 bg-slate-400" x-show="values === {{ $id }}">
-                                    <h2 class="h2">{{ $btm  }}: Informations complémentaires</h2>
-                                    <div class="flex flex-col gap-2">
-    
-                                        @foreach ($champ['btm_values'] as $btm_value)
-                                            @if ($btm_value['type'] == 'select')
-                                                <x-forms.select :label="$btm_value['label']" :field="$btm_value['col']" :options="$btm_value['bt_options']">
-                                                </x-forms.select>
-                                            @elseif ($btm_value['type'] == 'number')
-                                                <x-forms.input-text :type="$btm_value['type']" :label="$btm_value['label']" :field="$btm_value['col']">
-                                                </x-forms.input-text>
-    
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                    <x-buttons.lime-button>Enregistrer</x-buttons.lime-button>
-                                </div>
-                        @endif
+                        @endforeach
                 </div>
-                @endforeach
-    </div>
-@endisset
-@elseif ($champ['type'] == 'password')
-@else
-<x-forms.input-text :type="$champ['type']" :label="$champ['label']" :field="$champ['col']"></x-forms.input-text>
-@endif
-@endforeach
+            @endisset
+        @elseif ($champ['type'] == 'password')
+        @else
+            <x-forms.input-text :type="$champ['type']" :label="$champ['label']" :field="$champ['col']"></x-forms.input-text>
+            @endif
+            @endforeach
 </div>
 
 

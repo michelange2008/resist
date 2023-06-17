@@ -19,6 +19,6 @@ class Espece extends Model
     }
 
     function anthelms() : BelongsToMany {
-        return $this->belongsToMany(Anthelm::class);
+        return $this->belongsToMany(Anthelm::class)->withPivot('voie_id', 'posologie', 'unite_id', 'lait', 'viande');
     }
 }

@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('anthelm_id')->constrained();
             $table->foreignId('espece_id')->constrained();
-            $table->foreignId('voie_id')->constrained();
-            $table->foreignId('unite_id')->constrained();
-            $table->float('posologie', 8, 2);
-            $table->float('lait', 8, 2);
-            $table->float('viande', 8, 2);
+            $table->set('voie', ['IM', 'SC', 'PO', 'VO'])->nullable();
+            $table->string('unite', 191)->nullable();
+            $table->float('posologie', 8, 2)->nullable();
+            $table->string('lait', 191)->nullable();
+            $table->string('viande', 191)->nullable();
         });
     }
 
