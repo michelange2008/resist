@@ -111,7 +111,7 @@ class ItemsFactory extends Component
             $this->icone->storeAs('public/img', $this->icone->getFileName());
         }
 
-        $this->modelWithPath::upsert($this->state);
+        $this->modelWithPath::create($this->state);
 
         $this->reset('state');
         $this->change = false;
@@ -164,16 +164,13 @@ class ItemsFactory extends Component
             }
         }
         $btm_list = $btm_list->unique(); // On enlève d'éventuels doublons 
+
         if ($btm_list->contains($btm_id)) { // Si la molécules sur laquelle on a cliqué est déjà présente dans la liste
-            $btm_list->forget(array_search($btm_id, $btm_list->toArray())); // On l'enlève
+            $this->item->{$btms}()->detach($btm_id);
         } else {
-            $btm_list->push($btm_id); // Sinon on l'ajoute
+            $this->item->{$btms}()->attach($btm_id);
         }
 
-        $this->item->{$btms}()->detach(); // On vide les associations
-        foreach ($btm_list as $btm_id) {
-            $this->item->{$btms}()->attach($btm_id); // et on les reremplit avec la liste qui vient d’être faire
-        }
     }
 
     public function cancel()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatePosologieRequest;
 use App\Models\Anthelm;
 use App\Models\Espece;
 use Illuminate\Contracts\View\View;
@@ -30,9 +31,20 @@ class PosologieController extends Controller
         ]);
     }
 
-    function store(Request $request, $anthelm, $espece) : RedirectResponse {
+    function update(UpdatePosologieRequest $request) : RedirectResponse {
         
-        dd($request->all());
+        $validated = $request->validated();
+
+        $anthelm = Anthelm::find($request->anthelm_id);
+
+        $anthelm->especes()->detach($request->espece_id);
+        $anthelm->especes()->attach($request->espece_id, [
+            'voie' => $request->voie,
+            'posologie' => $request->posologie,
+            'lait' => $request->lait,
+            'viande' => $request->viande,
+        ]);
+
         return redirect()->route('posologie.index');
     }
 }

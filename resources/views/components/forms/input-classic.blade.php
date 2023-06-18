@@ -5,10 +5,10 @@
     <label for="{{ $name }}">{{ $label }}</label>
 
     <input class="inline-block disabled:text-gray-500" type="{{ $type }}" name="{{ $name }}"
-        value="{{ $value }}" @if ($disabled) disabled @endif>
+        value="{{ old($name) ?? $value }}" @if ($disabled) disabled @endif>
 
-    {{-- @error($model)
-        <div class="text-red-900 text-xs">{{ $message }}</div>
-    @enderror --}}
+    @error($name)
+        <div class="text-red-900 text-xs">{{$message}}</div>
+    @enderror
 
 </div>

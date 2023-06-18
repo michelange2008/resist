@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('items/{model}', ItemsFactory::class);
     Route::get('posologie', [PosologieController::class, 'index'])->name('posologie.index');
     Route::get('posologie/edit/{anthelm}/{espece}', [PosologieController::class, 'edit'])->name('posologie.edit');
-    Route::post('posologie', [PosologieController::class, 'store'])->name('posologie.store');
+    Route::post('posologie/update', [PosologieController::class, 'update'])->name('posologie.update');
     // Route::get('test', TestComp::class);
 });
 

@@ -14,23 +14,30 @@
                         <h2 class="h2 text-orange-200">{{ $anthelm->nom }} </h2>
                     </div>
                     <div class="p-3 flex flex-col gap-2">
-                        @foreach ($anthelm->especes as $espece)
+                        @foreach ($anthelm->especes->sortBy($anthelm->espece_id) as $espece)
                             <div class="flex flex-row justify-between">
                                 <div class="flex flex-row gap-5 items-center">
                                     <img class="w-8" src="{{ url('storage/img/' . $espece->icone) }}"
                                         alt="{{ $espece->icone }}">
                                     <div class="grid grid-cols-2 gap-2">
                                         @if ($espece->pivot->voie != null)
-                                            <p>Voie: {{ $espece->pivot->voie }} </p>
+                                            <p>
+                                                <span class="text-slate-600 italic">Voie: </span>
+                                                <span class="font-bold">{{ $espece->pivot->voie }} </span>
+                                            </p>
                                         @endif
                                         @if ($espece->pivot->lait)
-                                            <p>Lait: {{ $espece->pivot->lait }} </p>
+                                            <p>
+                                                <span class="text-slate-600 italic">Lait: </span>
+                                                <span class="font-bold">{{ $espece->pivot->lait }} </span></p>
                                         @endif
                                         @if ($espece->pivot->posologie)
-                                            <p>{{ $espece->pivot->posologie }} </p>
+                                            <p><span class="font-bold">{{ $espece->pivot->posologie }} </span></p>
                                         @endif
                                         @if ($espece->pivot->viande)
-                                            <p>Viande: {{ $espece->pivot->viande }} </p>
+                                            <p>
+                                                <span class="text-slate-600 italic">Viande: </span>
+                                                <span class="font-bold">{{ $espece->pivot->viande }} </span></p>
                                         @endif
                                     </div>
                                 </div>
