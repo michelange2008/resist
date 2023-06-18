@@ -16,20 +16,12 @@
             "intitule": "hr"
         },
         "molecule": {
-            "intitule": "Molécules anthelminthiques",
+            "intitule": "Molécules",
             "url": "Molecule"
         },
         "anthelm": {
-            "intitule": "Médicaments anthelminthiques",
+            "intitule": "Médicaments",
             "url": "Anthelm"
-        },
-        "voie": {
-            "intitule": "Voies d'administration",
-            "url": "Voie"
-        },
-        "unite": {
-            "intitule": "Unités",
-            "url": "Unite"
         },
         "fermes" : {
             "intitule": "hr"

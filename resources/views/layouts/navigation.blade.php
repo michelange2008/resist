@@ -21,7 +21,13 @@
                         @lang('commun.add_saisie')
                     </x-nav-link>
                 </div>
-                <x-dropdown-perso :menu="\Storage::json('public/json/menu-items.json')"></x-dropdown-perso>            
+                <x-dropdown-perso :menu="\Storage::json('public/json/menu-items.json')"></x-dropdown-perso>   
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('posologie.index')" :active="request()->routeIs('posologie.index')">
+                        @lang('commun.posologies')
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

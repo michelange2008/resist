@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PosologieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\ItemsFactory;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('items/{model}', ItemsFactory::class);
+    Route::get('posologie', [PosologieController::class, 'index'])->name('posologie.index');
+    Route::get('posologie/edit/{anthelm}/{espece}', [PosologieController::class, 'edit'])->name('posologie.edit');
+    Route::post('posologie', [PosologieController::class, 'store'])->name('posologie.store');
     // Route::get('test', TestComp::class);
 });
 

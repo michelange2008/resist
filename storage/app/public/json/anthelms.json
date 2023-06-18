@@ -78,9 +78,7 @@
                     "rules": "string|max:2"
                 },
                 "posologie": {
-                    "type": "number",
-                    "min": 0,
-                    "step": 0.1,
+                    "type": "text",
                     "label": "Posologie",
                     "col": "posologie",
                     "align": "left",
@@ -89,20 +87,8 @@
                     "required": true,
                     "rules": ""
                 },
-                "unite": {
-                    "type": "text",
-                    "label": "Unité",
-                    "col": "unite",
-                    "align": "left",
-                    "search" : false,
-                    "onTable": false,
-                    "required": true,
-                    "rules": "string|max:50"
-                },
                 "lait": {
-                    "type": "number",
-                    "min": 0,
-                    "step": 0.1,
+                    "type": "text",
                    "label": "TA lait",
                     "col": "lait",
                     "align": "left",
@@ -112,9 +98,7 @@
                     "rules": ""
                 },
                 "viande": {
-                    "type": "number",
-                    "min": 0,
-                    "step": 1,
+                    "type": "text",
                     "label": "TA viande",
                     "col": "viande",
                     "align": "left",

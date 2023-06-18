@@ -111,7 +111,7 @@ class ItemsFactory extends Component
             $this->icone->storeAs('public/img', $this->icone->getFileName());
         }
 
-        $this->modelWithPath::create($this->state);
+        $this->modelWithPath::upsert($this->state);
 
         $this->reset('state');
         $this->change = false;
