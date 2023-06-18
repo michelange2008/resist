@@ -93,6 +93,8 @@
 
                     @elseif ($champ['type'] == 'checkbox')
 
+                    @elseif ($champ['type'] == 'bool')
+                        <x-forms.input-bool :field="$champ['col']" :label="$champ['label']"></x-forms.input-bool>
                     @elseif ($champ['type'] == 'id')
 
                     @elseif ($champ['type'] == 'radio')
@@ -121,6 +123,7 @@
                 </div>
             @endisset
         @elseif ($champ['type'] == 'password')
+        @elseif ($champ['type'] == 'hasMany')
         @else
             <x-forms.input-text :type="$champ['type']" :label="$champ['label']" :field="$champ['col']"></x-forms.input-text>
             @endif

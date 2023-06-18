@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Anthelm extends Model
 {
@@ -26,5 +27,10 @@ class Anthelm extends Model
     function laboratoire(): BelongsTo
     {
         return $this->belongsTo(Laboratoire::class);    
+    }
+
+    function tests(): HasMany
+    {
+        return $this->hasMany(Test::class);    
     }
 }

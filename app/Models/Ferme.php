@@ -20,6 +20,7 @@ class Ferme extends Model
 
     function commune(): BelongsTo
     {
-        return $this->belongsTo(Insee::class, 'Commune_id');
+        return $this->belongsTo(Commune::class);
     }
-}
+
+ }

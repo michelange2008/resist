@@ -1,0 +1,107 @@
+{
+    "nom": "Fermes",
+    "model": "Ferme",
+    "icone": "ferme.svg",
+    "orderBy": "nom",
+    "show": false,
+    "add": true,
+    "edit": true,
+    "cols": {
+        "id": {
+            "type": "id",
+            "label": "Id",
+            "col": "id",
+            "align": "center",
+            "search" : false,
+            "onTable": false,
+            "required": true,
+            "rules": ""
+        },
+        "nom": {
+            "type": "string",
+            "label": "Nom",
+            "col": "nom",
+            "align": "left",
+            "search" : true,
+            "onTable": true,
+            "required": true,
+            "rules": "string|max:191"
+        },
+        "email": {
+            "type": "email",
+            "label": "Email",
+            "col": "email",
+            "align": "left",
+            "search" : true,
+            "onTable": true,
+            "required": true,
+            "rules": "string|max:191"
+        },
+        "ede": {
+            "type": "number",
+            "label": "N° EDE",
+            "col": "ede",
+            "align": "left",
+            "search" : true,
+            "onTable": true,
+            "required": false,
+            "rules": "string|max:191"
+        },
+        "isBio": {
+            "type": "bool",
+            "label": "BIO",
+            "col": "isBio",
+            "align": "left",
+            "search" : true,
+            "onTable": true,
+            "required": false,
+            "rules": "string|max:191"
+        },
+        "adresse": {
+            "type": "string",
+            "label": "Adresse",
+            "col": "adresse",
+            "align": "left",
+            "search" : true,
+            "onTable": true,
+            "required": false,
+            "rules": "string|max:191"
+        },
+        "commune" : {
+            "type": "select",
+            "label": "Commune",
+            "col": "commune_id",
+            "belongsTo": "commune",
+            "bt_table": "communes",
+            "bt_col": "Commune",
+            "bt_type": "text",
+            "bt_options": [],
+            "align": "left",
+            "search" : false,
+            "onTable": true,
+            "required": true,
+            "rules": ""
+        },
+        "latitude": {
+            "type": "decimal",
+            "label": "Latitude",
+            "col": "latitude",
+            "align": "left",
+            "search" : true,
+            "onTable": false,
+            "required": false,
+            "rules": "numeric"
+        },
+        "longitude": {
+            "type": "decimal",
+            "label": "Longitude",
+            "col": "longitude",
+            "align": "left",
+            "search" : true,
+            "onTable": false,
+            "required": false,
+            "rules": "numeric"
+        }
+
+    }
+}

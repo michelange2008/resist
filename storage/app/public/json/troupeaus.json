@@ -18,6 +18,16 @@
             "required": true,
             "rules": null
         },
+        "nom": {
+            "type": "string",
+            "label": "Nom",
+            "col": "nom",
+            "align": "left",
+            "search" : true,
+            "onTable": true,
+            "required": true,
+            "rules": "string|max:191"
+        },
         "ferme": {
             "type": "select",
             "col": "ferme_id",
@@ -38,11 +48,12 @@
             "col": "espece_id",
             "belongsTo": "espece",
             "bt_table": "especes",
-            "bt_col": "icone",
+            "bt_col": "nom",
             "bt_type": "img",
+            "bt_col_display" : "icone",
             "bt_options": [],
             "label": "Espece",
-            "align": "left",
+            "align": "center",
             "search" : false,
             "onTable": true,
             "required": false,
@@ -53,11 +64,12 @@
             "col": "production_id",
             "belongsTo": "production",
             "bt_table": "productions",
-            "bt_col": "icone",
+            "bt_col": "nom",
             "bt_type": "img",
+            "bt_col_display" : "icone",
             "bt_options": [],
             "label": "Production",
-            "align": "left",
+            "align": "center",
             "search" : false,
             "onTable": true,
             "required": false,
@@ -71,7 +83,7 @@
             "search" : false,
             "onTable": true,
             "required": true,
-            "rules": "number"
+            "rules": "numeric"
         }
 
     }

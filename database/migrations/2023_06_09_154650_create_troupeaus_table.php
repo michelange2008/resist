@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('troupeaus', function (Blueprint $table) {
             $table->id();
+            $table->string('nom', 191);
             $table->foreignId('ferme_id')->constrained();
             $table->foreignId('espece_id')->constrained();
             $table->foreignId('production_id')->constrained();

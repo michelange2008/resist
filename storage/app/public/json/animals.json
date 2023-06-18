@@ -1,0 +1,59 @@
+{
+    "nom": "Animaux",
+    "model": "Animal",
+    "icone": "especes.svg",
+    "orderBy": "numero",
+    "add": true,
+    "show": false,
+
+    "cols": {
+        "id": {
+            "col": "id",
+            "label": "Id",
+            "type": "id",
+            "taille": null,
+            "search" : false,
+            "onTable": false,
+            "align": "left",
+            "required": true,
+            "rules": null
+        },
+        "numero": {
+            "col": "numero",
+            "label": "Numéro",
+            "type": "string",
+            "taille": 191,
+            "search" : true,
+            "onTable": true,
+            "align": "left",
+            "required": true,
+            "rules": "required|max:191|string"
+        },
+        "nom": {
+            "col": "nom",
+            "label": "Nom",
+            "type": "string",
+            "taille": 191,
+            "search" : true,
+            "onTable": true,
+            "align": "left",
+            "required": true,
+            "rules": "max:191|string"
+        },
+        "troupeau": {
+            "type": "select",
+            "col": "troupeau_id",
+            "belongsTo": "troupeau",
+            "bt_table": "troupeaus",
+            "bt_col": "nom",
+            "bt_type": "text",
+            "bt_options": [],
+            "label": "Troupeau",
+            "align": "center",
+            "search" : false,
+            "onTable": true,
+            "required": false,
+            "rules": ""
+          }
+    }
+}

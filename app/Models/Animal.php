@@ -5,22 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Anthelm_Espece extends Model
+class Animal extends Model
 {
     use HasFactory;
     public $timestamps = false;
     protected $guarded = [];
-    protected $table = "anthelm_espece";
 
-    public function voie(): BelongsTo
-    {
-        return $this->belongsTo(Voie::class);
+    function troupeau() : BelongsTo {
+        return $this->belongsTo(Troupeau::class);
     }
 
-    public function unite(): BelongsTo
+    function tests(): BelongsToMany 
     {
-        return $this->belongsTo(Unite::class);
+        return $this->belongsToMany(Test::class);    
     }
-
 }

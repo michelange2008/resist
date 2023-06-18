@@ -1,10 +1,10 @@
 {
-    "nom": "Molécules anthelminthiques",
-    "model": "Molecule",
-    "icone": "molecule.svg",
+    "nom": "Type de production",
+    "model": "Production",
+    "icone": "production.svg",
     "orderBy": "nom",
     "show": false,
-    "add": true,
+    "add": "true",
     "edit": true,
     "cols": {
         "id": {
@@ -27,41 +27,21 @@
             "required": true,
             "rules": "string|max:191"
         },
-        "famille": {
-            "type": "string",
-            "label": "Famille d'anthelminthiques",
-            "col": "famille",
-            "align": "left",
-            "search" : true,
-            "onTable": true,
-            "required": true,
-            "rules": "string|max:191"
-        },
-        "sousfamille": {
-            "type": "string",
-            "label": "Sous-famille",
-            "col": "sousfamille",
-            "align": "left",
-            "search" : true,
-            "onTable": true,
-            "required": true,
-            "rules": "string|max:191"
-        },
-        "anthelms": {
-            "type": "belongsToMany",
+        "anthelm": {
+            "type": "hasMany",
             "label": "Médicaments",
-            "belongsToMany": "anthelms",
+            "belongsToMany": "anthelm",
             "btm_table": "anthelms",
             "btm_pivot_col" : "anthelm_id",
             "btm_col": "nom",
             "btm_options": [],
-            "hasValues" : false,
+            "hasValues": false,
             "align": "left",
             "search" : false,
             "onTable": true,
             "required": false,
             "rules": ""
-        }
 
+        }
     }
 }

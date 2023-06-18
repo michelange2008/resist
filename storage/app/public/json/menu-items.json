@@ -12,7 +12,7 @@
             "intitule": "Types de production",
             "url": "Production"
         },
-        "medicaments" : {
+        "sep_1" : {
             "intitule": "hr"
         },
         "molecule": {
@@ -23,12 +23,24 @@
             "intitule": "Médicaments",
             "url": "Anthelm"
         },
-        "fermes" : {
+        "laboratoires": {
+            "intitule": "Laboratoires",
+            "url": "Laboratoire"
+        },
+        "sep_2" : {
             "intitule": "hr"
         },
-        "troupeau": {
+        "fermes" : {
+            "intitule": "Fermes",
+            "url": "Ferme"
+        },
+         "troupeau": {
             "intitule": "Troupeaux",
             "url": "Troupeau"
-        }
+        },
+        "animal": {
+           "intitule": "Animaux",
+           "url": "Animal"
+       }
     }
 }
