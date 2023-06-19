@@ -3,6 +3,7 @@
 use App\Http\Controllers\PosologieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\ItemsFactory;
+use App\Http\Livewire\TestCreate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('posologie', [PosologieController::class, 'index'])->name('posologie.index');
     Route::get('posologie/edit/{anthelm}/{espece}', [PosologieController::class, 'edit'])->name('posologie.edit');
     Route::post('posologie/update', [PosologieController::class, 'update'])->name('posologie.update');
-    // Route::get('test', TestComp::class);
+    Route::get('test', TestCreate::class)->name('test.create');
 });
 
 require __DIR__.'/auth.php';

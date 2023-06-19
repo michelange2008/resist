@@ -17,7 +17,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('test.create')" :active="request()->routeIs('test.create')">
                         @lang('commun.add_saisie')
                     </x-nav-link>
                 </div>
