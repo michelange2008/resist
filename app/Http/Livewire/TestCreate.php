@@ -61,7 +61,7 @@ class TestCreate extends Component
             'anthelm_id' => $this->anthelm_id,
             'efficacite' => $this->efficacite,
         ]);
-        return redirect()->to('/tests/show');
+        return redirect()->to('/tests/tous');
     }
 
     function calculEfficacite(): void
