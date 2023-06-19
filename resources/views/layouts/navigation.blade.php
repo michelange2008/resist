@@ -21,6 +21,7 @@
                         @lang('commun.add_saisie')
                     </x-nav-link>
                 </div>
+                <x-dropdown-perso :menu="\Storage::json('public/json/menu-tests.json')"/>
                 <x-dropdown-perso :menu="\Storage::json('public/json/menu-items.json')"></x-dropdown-perso>   
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">

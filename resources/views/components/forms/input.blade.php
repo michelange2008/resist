@@ -1,4 +1,4 @@
-@props(['type' => 'text', 'label', 'field'])
+@props(['type' => 'text', 'label', 'field', 'min' => ''])
 
 <div {{ $attributes->merge(['class' => 'flex flex-col my-2']) }}>
 
@@ -6,10 +6,10 @@
         <label>{{ $label }}</label>
     @endif
 
-    <input type="{{ $type }}" wire:model.defer="{{ 'state.' . $field }}"
+    <input type="{{ $type }}" wire:model.lazy="{{ $field }}" min="{{ $min }}"
         class="form-input rounded border-1 focus:active:border-0">
 
-    @error('state.'.$field)
+    @error( $field )
         <div class="text-red-900 text-xs">{{ $message }}</div>
     @enderror
 

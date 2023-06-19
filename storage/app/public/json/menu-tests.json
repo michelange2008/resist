@@ -1,0 +1,20 @@
+{
+    "menu": {
+        "intitule": "Tests",
+        "url": "tests"
+    },
+    "sousmenus": {
+        "show" : {
+            "intitule": "Tous",
+            "url": "tous"
+        },
+        "create": {
+            "intitule": "Nouveau test",
+            "url": "nouveau"
+        },
+        "edit": {
+            "intitule": "Modifier",
+            "url": "modifier"
+        }
+    }
+}
