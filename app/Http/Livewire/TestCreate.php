@@ -52,7 +52,7 @@ class TestCreate extends Component
     function save()
     {
         $this->validate();
-        Test::create([
+        $test = Test::create([
             'T0' => $this->T0,
             'opg0' => $this->opg0,
             'T1' => $this->T1,
@@ -61,6 +61,8 @@ class TestCreate extends Component
             'anthelm_id' => $this->anthelm_id,
             'efficacite' => $this->efficacite,
         ]);
+
+        $test->animals()->attach($this->ax);
         return redirect()->to('/tests/show');
     }
 
