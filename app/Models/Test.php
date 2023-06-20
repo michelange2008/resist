@@ -11,6 +11,7 @@ class Test extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $dates = ['T0', 'T1'];
     protected $guarded = [];
 
     function troupeau(): BelongsTo
@@ -27,4 +28,5 @@ class Test extends Model
     {
         return $this->belongsTo(Anthelm::class);    
     }
+
 }

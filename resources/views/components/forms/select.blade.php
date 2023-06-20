@@ -1,4 +1,4 @@
-@props(['label', 'field', 'options'])
+@props(['label', 'field', 'options', 'selected' => ''])
 
 <div {{ $attributes->merge([ 'class' => "flex flex-col my-2"]) }}>
 
@@ -10,7 +10,7 @@
 
         @foreach ($options as $id => $option)
 
-        <option value="{{ $id }}">{{ ucFirst($option) }} </option>
+        <option value="{{ $id }}"  >{{ ucFirst($option) }} </option>
 
         @endforeach
 

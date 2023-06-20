@@ -61,6 +61,9 @@ class TestCreate extends Component
             'anthelm_id' => $this->anthelm_id,
             'efficacite' => $this->efficacite,
         ]);
+
+        $test->animals()->attach($this->ax);
+
         return redirect()->to('/tests/tous');
     }
 
@@ -77,6 +80,6 @@ class TestCreate extends Component
 
     public function render()
     {
-        return view('livewire.test-create');
+        return view('livewire.tests.test-create');
     }
 }

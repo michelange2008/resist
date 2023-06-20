@@ -17,11 +17,10 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('test.create')" :active="request()->routeIs('test.create')">
-                        @lang('commun.add_saisie')
+                    <x-nav-link :href="route('tests.show')" :active="request()->routeIs('tests.show')">
+                        @lang('commun.all_tests')
                     </x-nav-link>
                 </div>
-                <x-dropdown-perso :menu="\Storage::json('public/json/menu-tests.json')"/>
                 <x-dropdown-perso :menu="\Storage::json('public/json/menu-items.json')"></x-dropdown-perso>   
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">

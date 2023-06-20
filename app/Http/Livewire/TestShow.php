@@ -13,8 +13,20 @@ class TestShow extends Component
     {
         $this->tests = Test::orderBy('T0', 'DESC')->get();    
     }
+
+    function create()
+    {
+        return redirect()->route('test-create');    
+    }
+
+    function del(Test $test)
+    {
+        $test->animals()->detach();
+        Test::destroy($test->id);   
+        $this->tests = Test::orderBy('T0', 'DESC')->get();    
+    }
     public function render()
     {
-        return view('livewire.test-show');
+        return view('livewire.tests.test-show');
     }
 }
