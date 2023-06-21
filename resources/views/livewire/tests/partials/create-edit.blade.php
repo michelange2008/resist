@@ -45,7 +45,7 @@
         <x-buttons.success-button>
             <x-icones.save /> Enregistrer
         </x-buttons.success-button>
-        <x-buttons.cancel-button :route="route('tests.show')">
+        <x-buttons.cancel-button :route="route('tests.index')">
             <x-icones.return/> Annuler
         </x-buttons.cancel-button>
     </div>

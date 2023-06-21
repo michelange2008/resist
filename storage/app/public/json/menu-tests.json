@@ -4,7 +4,7 @@
         "url": "tests"
     },
     "sousmenus": {
-        "show" : {
+        "index" : {
             "intitule": "Tous",
             "url": "tous"
         },

@@ -40,9 +40,8 @@
                                     {{ $test->animals()->count() }}
                                 </td>
                                 <td class="td group-hover:text-white font-bold text-base text-green-900 cursor-pointer">
-                                    <a href="{{ route('test.edit', $test)}}">
-                                        <x-icones.link />
-                                    </a>
+                                    <div wire:click="show( {{ $test }} )"><x-icones.link/></div>
+
                                 </td>
 
                                 <td 
