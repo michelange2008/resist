@@ -19,15 +19,13 @@
                                 @if ($test->efficacite < 95) class="group border-b bg-red-200 hover:bg-red-500 hover:text-white"
                                 @else class="group border-b bg-green-200 hover:bg-green-500 hover:text-white" @endif>
 
-                                <td class="td">{{ $test->T0 }}</td>
-                                <td class="td">{{ $test->anthelm->nom }}</td>
+                                <td class="td">{{ \Carbon\Carbon::parse($test->T0)->format('d/m/Y') }}</td>
+                                <td class="td font-bold">{{ $test->anthelm->nom }}</td>
                                 <td class="td">
-                                    @foreach ($test->anthelm->molecules as $molecule)
-                                        {{ $molecule->nom }}
-                                        @if (!$loop->last)
-                                            ,
-                                        @endif
-                                    @endforeach
+                                    @include('components.affiche-liste-items', [
+                                        'liste' => $test->anthelm->molecules, 
+                                        'col' => 'nom'
+                                        ])
                                 </td>
                                 <td class="td">
                                     <img class="w-12 group-hover:invert"

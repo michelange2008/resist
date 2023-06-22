@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Test;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class TestsIndex extends Component
@@ -10,6 +11,8 @@ class TestsIndex extends Component
     public $tests;
     public $test;
     public $detail;
+    public $opg0Long, $opg1Long;
+    public $intervalle;
 
     function mount()
     {
@@ -25,7 +28,8 @@ class TestsIndex extends Component
     function show(Test $test)
     {
         $this->test = $test;
-        // $this->detail = true;    
+        $this->intervalle = Carbon::parse($test->T1)->diffInDays($test->T0);
+        $this->detail = true;    
     }
 
     function del(Test $test)

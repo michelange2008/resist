@@ -12,9 +12,9 @@
                 <div x-show="!detail">
                     @include('livewire.tests.partials.index-table')
                 </div>
-                <div x-show="!detail">
-                    @include('livewire.tests.partials.test-show')
-                </div>
+            </div>
+            <div x-show="detail">
+                @include('livewire.tests.partials.test-show')
             </div>
         </div>
     </div>
