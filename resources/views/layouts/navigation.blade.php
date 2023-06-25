@@ -17,8 +17,13 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('tests.index')" :active="request()->routeIs('tests.index')">
+                    <x-nav-link :href="route('tests')" :active="request()->routeIs('tests')">
                         @lang('commun.all_tests')
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('fermes')" :active="request()->routeIs('fermes')">
+                        @lang('commun.fermes')
                     </x-nav-link>
                 </div>
                 <x-dropdown-perso :menu="\Storage::json('public/json/menu-items.json')"></x-dropdown-perso>   

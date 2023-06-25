@@ -2,10 +2,22 @@
 
 @foreach ($liste as $item)
 
-    {{ mb_convert_case($item->{$col}, MB_CASE_TITLE_SIMPLE) }}
+    @if ($loop->first)
+    
+        {{ mb_convert_case($item->{$col}, MB_CASE_TITLE_SIMPLE) }}, 
 
-    @if (!$loop->last)
-        ,
+    @else
+
+        @if ($loop->last)
+
+            {{ $item->{$col} }}
+
+        @else
+
+            {{ $item->{$col} }}, 
+
+        @endif
+
     @endif
 
 @endforeach

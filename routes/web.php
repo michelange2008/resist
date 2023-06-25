@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\PosologieController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Fermes\Fermes;
+use App\Http\Livewire\Fermes\FermeShow;
 use App\Http\Livewire\ItemsFactory;
-use App\Http\Livewire\TestsIndex;
-use App\Http\Livewire\TestCreate;
-use App\Http\Livewire\TestEdit;
+use App\Http\Livewire\Tests\Tests;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,9 +36,10 @@ Route::middleware('auth')->group(function () {
     Route::get('posologie', [PosologieController::class, 'index'])->name('posologie.index');
     Route::get('posologie/edit/{anthelm}/{espece}', [PosologieController::class, 'edit'])->name('posologie.edit');
     Route::post('posologie/update', [PosologieController::class, 'update'])->name('posologie.update');
-    Route::get('tests/tous', TestsIndex::class)->name('tests.index');
-    Route::get('tests/nouveau', TestCreate::class)->name('test.create');
-    Route::get('tests/modifier/{test}', TestEdit::class)->name('test.edit');
+    Route::get('tests', Tests::class)->name('tests');
+    Route::get('tests/{test}', [Tests::class, 'show'])->name('tests.show');
+    Route::get('fermes', Fermes::class)->name('fermes');
+    Route::get('fermes/{ferme}', FermeShow::class)->name('ferme.show');
 });
 
 require __DIR__.'/auth.php';

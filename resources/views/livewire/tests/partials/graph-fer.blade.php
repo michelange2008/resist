@@ -17,7 +17,7 @@
 @elseif ($test->efficacite >= 20)
     <div class="bg-red-700 text-white px-2 py-5 rounded-r-full w-8/12 ">{{ $intervalle }} jours plus tard: {{ $test->opg1 }} opg</div>
 @elseif ($test->efficacite >= 10)
-    <div class="bg-red-800 text-white px-2 py-5 rounded-r-full w-9/12 ">{{ $intervalle }} jours plus tard: {{ $test->opg1 }} opg</div>
+    <div class="bg-red-800 text-white px-2 py-5 rounded-r-full w-10/12 ">{{ $intervalle }} jours plus tard: {{ $test->opg1 }} opg</div>
 @elseif ($test->efficacite == 0)
-    <div class="bg-red-900 text-white px-2 py-5 rounded-r-full w-10/12 ">{{ $intervalle }} jours plus tard: {{ $test->opg1 }} opg</div>
+    <div class="bg-red-900 text-white px-2 py-5 rounded-r-full w-12/12 ">{{ $intervalle }} jours plus tard: {{ $test->opg1 }} opg</div>
 @endif

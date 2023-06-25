@@ -1,26 +1,32 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Tests;
 
-use App\Models\Test;
 use App\Models\Animal;
 use App\Models\Anthelm;
 use App\Models\Ferme;
+use App\Models\Test;
 use App\Models\Troupeau;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Validated;
 use Livewire\Component;
 
-class TestCreate extends Component
+class Tests extends Component
 {
+    public $tests;
+    public $test;
+    public $troupeaus;
+    public $anthelms;
     public $fermes;
     public $ferme;
-    public $anthelms;
-    public $troupeaus;
-    public $troupeau;
     public $animals;
+    public $detail;
+    public $create;
+    public $index;
     public $T0, $T1, $opg0, $opg1, $troupeau_id, $anthelm_id, $efficacite;
     public $state = [];
     public $ax = [];
+    public $intervalle;
 
     protected $rules = [
         'T0' => 'required|date',
@@ -31,13 +37,49 @@ class TestCreate extends Component
         'anthelm_id' => 'required',
     ];
 
-    function mount(): void {
+    protected $validationAttributes = [
+        'T0' => 'date du traitement',
+        'T1' => 'date du contrôle',
+        'opg0' => 'OPG avant traitement',
+        'opg1' => 'OPG de contrôle',
+    ];
+
+    function mount()
+    {
         $this->anthelms = Anthelm::orderBy('nom')->get();
         $this->fermes = Ferme::orderBy('nom')->get();
         $this->troupeaus = Troupeau::orderBy('ferme_id')->get();
-
         $this->animals = Animal::orderBy('troupeau_id')->get();
 
+        $this->index = true;
+        $this->detail = false;
+        $this->create = false;
+
+        $this->tests = Test::orderBy('T0', 'DESC')->get();    
+    }
+
+    function show(Test $test)
+    {
+        
+        $this->test = $test;
+        $this->intervalle = Carbon::parse($test->T1)->diffInDays($test->T0);
+        $this->mount();    
+        $this->index = false;
+        $this->detail = true;
+    }
+
+    function create()
+    {
+        $this->index = false;
+        $this->create = true;
+
+    }
+
+    function del(Test $test)
+    {
+        $test->animals()->detach();
+        Test::destroy($test->id);   
+        $this->tests = Test::orderBy('T0', 'DESC')->get();    
     }
 
     function updated() {
@@ -64,7 +106,10 @@ class TestCreate extends Component
 
         $test->animals()->attach($this->ax);
 
-        return redirect()->to('/tests/tous');
+        $this->create = false;
+        $this->index = true;
+        
+        $this->tests = Test::orderBy('T0', 'DESC')->get();    
     }
 
     function calculEfficacite(): void
@@ -77,9 +122,8 @@ class TestCreate extends Component
         }
     
     }
-
     public function render()
     {
-        return view('livewire.tests.test-create');
+        return view('livewire.tests.tests');
     }
 }
