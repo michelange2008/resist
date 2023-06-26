@@ -1,14 +1,14 @@
-@props(['disabled' => '', 'label', 'field', 'options'])
+@props(['disabled' => '', 'label', 'field', 'options', 'col' => 'nom'])
 <div class="flex flex-col my-2">
 
     <label>{{ $label }}</label>
 
-    <select {{ $disabled }} wire:model="{{ $field }}">
+    <select {{ $disabled }} wire:model.lazy="{{ $field }}">
 
         <option hidden value="">Choisir une valeur dans la liste ...</option>
 
         @foreach ($options as $option)
-            <option value="{{ $option->id }}">{{ ucFirst($option->nom) }} </option>
+            <option value="{{ $option->id }}">{{ ucFirst( $option->{$col} ) }} </option>
         @endforeach
 
         

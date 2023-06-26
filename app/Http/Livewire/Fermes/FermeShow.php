@@ -3,9 +3,11 @@
 namespace App\Http\Livewire\Fermes;
 
 use App\Models\Animal;
+use App\Models\Commune;
 use App\Models\Ferme;
 use App\Models\Test;
 use App\Models\Troupeau;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class FermeShow extends Component
@@ -14,6 +16,10 @@ class FermeShow extends Component
     public $animals;
     public $tests;
     public $edit;
+    public $farm = [];
+    public $communes;
+    public $cps;
+    public $cp;
 
     function mount() 
     {
@@ -21,6 +27,15 @@ class FermeShow extends Component
         $this->tests = Test::whereIn('troupeau_id', $troupeau_ids )->get();
         $this->animals = Animal::whereIn('troupeau_id',  $troupeau_ids)->get();
         $this->edit = false;
+        $this->communes = Commune::all();
+        $this->cps = DB::table('communes')->select('id', 'Codepos')->groupBy('Codepos')->get();
+
+        $this->farm = $this->ferme->toArray();
+    }
+
+    function updated()
+    {
+        // $this->communes = Commune::where('Codepos', $this->cp)->get();    
     }
 
     function edit()
