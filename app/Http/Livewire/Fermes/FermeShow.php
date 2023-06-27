@@ -28,14 +28,18 @@ class FermeShow extends Component
         $this->animals = Animal::whereIn('troupeau_id',  $troupeau_ids)->get();
         $this->edit = false;
         $this->communes = Commune::all();
-        $this->cps = DB::table('communes')->select('id', 'Codepos')->groupBy('Codepos')->get();
-
+        $this->cps = DB::table('communes')->select('Codepos')->groupBy('Codepos')->get();
+        $this->cp = $this->ferme->commune->Codepos;
         $this->farm = $this->ferme->toArray();
+
+        array_pop($this->farm);
     }
 
     function updated()
     {
-        // $this->communes = Commune::where('Codepos', $this->cp)->get();    
+        $this->cps = DB::table('communes')->select('Codepos')->groupBy('Codepos')->get();
+
+        $this->communes = Commune::where('Codepos', $this->cp)->get();    
     }
 
     function edit()
