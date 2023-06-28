@@ -10,7 +10,7 @@ use App\Models\Troupeau;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class FermeShow extends Component
+class FermeDetail extends Component
 {
     public Ferme $ferme;
     public $animals;
@@ -20,6 +20,21 @@ class FermeShow extends Component
     public $communes;
     public $cps;
     public $cp;
+
+    protected $rules = [
+        'farm.nom' => 'required|string|max=191',
+        'farm.email' => 'required|email:rfc,dns',
+        'farm.adresse' => 'string|max:191',
+        'farm.commune' => 'required',
+        'farm.ede' => 'numeric',
+        'farm.isBio' => 'boolean',
+        'farm.longitude' => 'nullable|decimal:2,10',
+        'farm.latitude' => 'nullable|decimal:2,10',
+    ];
+
+    protected $validationAttributes = [
+        'farm.nom' => "Nom",
+    ];
 
     function mount() 
     {
@@ -42,13 +57,14 @@ class FermeShow extends Component
         $this->communes = Commune::where('Codepos', $this->cp)->get();    
     }
 
-    function edit()
+    function update(Ferme $ferme)
     {
-        
+        $this->cps = DB::table('communes')->select('Codepos')->groupBy('Codepos')->get();
+        $this->validate();
     }
 
     public function render()
     {
-        return view('livewire.fermes.ferme-show');
+        return view('livewire.fermes.ferme-detail');
     }
 }

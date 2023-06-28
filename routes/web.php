@@ -3,7 +3,7 @@
 use App\Http\Controllers\PosologieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Fermes\Fermes;
-use App\Http\Livewire\Fermes\FermeShow;
+use App\Http\Livewire\Fermes\FermeDetail;
 use App\Http\Livewire\ItemsFactory;
 use App\Http\Livewire\Tests\Tests;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('tests', Tests::class)->name('tests');
     Route::get('tests/{test}', [Tests::class, 'show'])->name('tests.show');
     Route::get('fermes', Fermes::class)->name('fermes');
-    Route::get('fermes/{ferme}', FermeShow::class)->name('ferme.show');
+    Route::get('ferme/{ferme}', FermeDetail::class)->name('ferme');
 });
 
 require __DIR__.'/auth.php';

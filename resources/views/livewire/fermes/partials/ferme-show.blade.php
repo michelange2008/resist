@@ -22,22 +22,8 @@
 
 @if ($ferme->isBio)
 <div>
-    <img src="{{ url('storage/img/bio.svg') }}" alt="Bio">
+    <img class="w-20" src="{{ url('storage/img/bio.svg') }}" alt="Bio">
 </div>
 @endif
 
-<x-forms.input label="Nom de l'exploitation" field="farm.nom"/>
 
-<x-forms.input type="email" label="Adresse électronique" field="farm.email" />
-
-@include('components.forms.input-adresse')
-
-<x-forms.input label="N° EDE" field="farm.ede"/>
-
-<input type="checkbox" wire:model.lazy="farm.isBio"> Elevage en agriculture biologique
-
-<div class="sm:grid grid-cols-2 gap-3">
-    <x-forms.input type="number" label="Latitude" field="farm.latitude" />
-    <x-forms.input type="number" label="Longitude" field="farm.longitude" />
-
-</div>
