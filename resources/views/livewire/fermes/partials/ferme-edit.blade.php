@@ -24,7 +24,7 @@
     <x-forms.input label="N° EDE" field="farm.ede"/>
 
     <div class="flex flex-row gap-2 items-center">
-        <input class="form-checkbox w-6 h-6 rounded" type="checkbox" wire:model.lazy="farm.isBio">
+        <input class="form-checkbox w-6 h-6 rounded" type="checkbox" wire:model.defer="farm.isBio">
         <img class="w-16" src="{{ url('storage/img/bio.svg') }}" alt="Bio">
     </div>
 

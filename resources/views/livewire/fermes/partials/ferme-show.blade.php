@@ -8,11 +8,17 @@
         {{ $ferme->nom }}
     </h2>
 
-    <p>
-        <span class="italic text-gray-600">Adresse: </span>
-    </p>
+    <p class="italic text-gray-600">Email: </p>
+    
+    <p class="px-2">{{ $ferme->email }} </p>
+
+    <p class="italic text-gray-600">Adresse: </p>
+
     <p class="px-2">
-        {{ $ferme->adresse }} - {{ $ferme->commune->Codepos }} {{ $ferme->commune->Commune }}
+        @if ($ferme->adresse != null)
+            {{ $ferme->adresse }} -     
+        @endif
+        {{ $ferme->commune->Codepos }} {{ $ferme->commune->Commune }}
     </p>
 </div>
 <div class="my-3">

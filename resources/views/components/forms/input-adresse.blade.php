@@ -4,7 +4,7 @@
 
         <label>Adresse</label>
 
-        <input type="text" wire:model.lazy="farm.adresse" class="form-input rounded border-1 focus:active:border-0">
+        <input type="text" wire:model.defer="farm.adresse" class="form-input rounded border-1 focus:active:border-0">
 
         @error('farm.adresse')
             <div class="text-red-900 text-xs">{{ $message }}</div>
@@ -16,7 +16,7 @@
 
         <label>Code postal</label>
 
-        <select wire:model.lazy="cp">
+        <select wire:model.defer="cp">
 
             @foreach ($cps as $cp)
                 <option hidden value="">Choisir une valeur dans la liste ...</option>

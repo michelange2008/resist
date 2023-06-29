@@ -4,10 +4,11 @@ namespace App\Http\Livewire\Fermes;
 
 use App\Models\Animal;
 use App\Models\Commune;
+use App\Models\Espece;
 use App\Models\Ferme;
+use App\Models\Production;
 use App\Models\Test;
 use App\Models\Troupeau;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class FermeDetail extends Component
@@ -15,17 +16,19 @@ class FermeDetail extends Component
     public Ferme $ferme;
     public $animals;
     public $tests;
-    public $edit;
+    public $especes;
+    public $productions;
+    public $edit, $addTroupeau;
     public $farm = [];
+    public $newTroupeau = [];
     public $communes;
     public $cps;
     public $cp;
 
     protected $rules = [
-        'farm.nom' => 'required|string|max=191',
+        'farm.nom' => 'required|string|max:191',
         'farm.email' => 'required|email:rfc,dns',
         'farm.adresse' => 'string|max:191',
-        'farm.commune' => 'required',
         'farm.ede' => 'numeric',
         'farm.isBio' => 'boolean',
         'farm.longitude' => 'nullable|decimal:2,10',
@@ -34,7 +37,14 @@ class FermeDetail extends Component
 
     protected $validationAttributes = [
         'farm.nom' => "Nom",
-    ];
+        'farm.email' => 'Adresse électronique',
+        'farm.adresse' => 'Adresse',
+        'farm.commune' => 'Commune',
+        'farm.ede' => 'N° EDE',
+        'farm.isBio' => 'BIO',
+        'farm.longitude' => 'Longitude',
+        'farm.latitude' => 'Latitude',
+   ];
 
     function mount() 
     {
@@ -42,8 +52,12 @@ class FermeDetail extends Component
         $this->tests = Test::whereIn('troupeau_id', $troupeau_ids )->get();
         $this->animals = Animal::whereIn('troupeau_id',  $troupeau_ids)->get();
         $this->edit = false;
+        $this->addTroupeau = false;
         $this->communes = Commune::all();
-        $this->cps = DB::table('communes')->select('Codepos')->groupBy('Codepos')->get();
+        $this->especes = Espece::all();
+        $this->productions = Production::all();
+        $this->cps = Commune::select('Codepos')->groupBy('Codepos')->get();
+    
         $this->cp = $this->ferme->commune->Codepos;
         $this->farm = $this->ferme->toArray();
 
@@ -52,15 +66,30 @@ class FermeDetail extends Component
 
     function updated()
     {
-        $this->cps = DB::table('communes')->select('Codepos')->groupBy('Codepos')->get();
+        $this->cps = Commune::select('Codepos')->groupBy('Codepos')->get();
 
         $this->communes = Commune::where('Codepos', $this->cp)->get();    
     }
 
     function update(Ferme $ferme)
     {
-        $this->cps = DB::table('communes')->select('Codepos')->groupBy('Codepos')->get();
+        $this->cps = Commune::select('Codepos')->groupBy('Codepos')->get();
+
         $this->validate();
+
+        Ferme::where('id', $ferme->id)->update($this->farm);
+        $this->ferme = Ferme::find($ferme->id);
+        $this->edit = false;
+    }
+
+    function addTroupeau()
+    {
+
+    }
+
+    function choixEspece(Espece $espece)
+    {
+        $this->newTroupeau['espece'] = $espece->id;
     }
 
     public function render()

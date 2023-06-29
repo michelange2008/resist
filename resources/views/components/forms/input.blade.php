@@ -6,7 +6,7 @@
         <label>{{ $label }}</label>
     @endif
 
-    <input type="{{ $type }}" wire:model.lazy="{{ $field }}" min="{{ $min }}"
+    <input type="{{ $type }}" wire:model.defer="{{ $field }}" min="{{ $min }}"
         class="form-input rounded border-1 focus:active:border-0">
 
     @error( $field )
