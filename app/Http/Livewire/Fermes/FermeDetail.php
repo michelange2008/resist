@@ -20,7 +20,8 @@ class FermeDetail extends Component
     public $productions;
     public $edit, $addTroupeau;
     public $farm = [];
-    public $newTroupeau = [];
+    public $herd = [];
+    public $animal;
     public $communes;
     public $cps;
     public $cp;
@@ -89,7 +90,19 @@ class FermeDetail extends Component
 
     function choixEspece(Espece $espece)
     {
-        $this->newTroupeau['espece'] = $espece->id;
+        $this->herd['espece'] = $espece->id;
+    }
+
+    function choixProduction(Production $production)
+    {
+        $this->herd['production'] = $production->id;    
+    }
+
+    function addAnimal()
+    {
+        $animaux = [];
+        $animaux[] = $this->animal;
+        $this->herd['animaux'] = $animaux;
     }
 
     public function render()

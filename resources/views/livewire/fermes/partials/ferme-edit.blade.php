@@ -2,9 +2,9 @@
 
 <div class="lg:grid lg:grid-cols-2 gap-3">
 
-    <x-forms.input label="Nom de l'exploitation" field="farm.nom"/>
+    <x-forms.input label="Nom de l'exploitation" model="farm.nom"/>
 
-    <x-forms.input type="email" label="Adresse électronique" field="farm.email" />
+    <x-forms.input type="email" label="Adresse électronique" model="farm.email" />
 
 </div>
 
@@ -12,16 +12,16 @@
 
 <div class="sm:grid grid-cols-2 gap-3">
 
-    <x-forms.input type="number" label="Latitude" field="farm.latitude" />
+    <x-forms.input type="number" label="Latitude" model="farm.latitude" />
 
-    <x-forms.input type="number" label="Longitude" field="farm.longitude" />
+    <x-forms.input type="number" label="Longitude" model="farm.longitude" />
 
 
 </div>
 
 <div class="sm:grid sm:grid-cols-2 gap-5  items-center">
 
-    <x-forms.input label="N° EDE" field="farm.ede"/>
+    <x-forms.input label="N° EDE" model="farm.ede"/>
 
     <div class="flex flex-row gap-2 items-center">
         <input class="form-checkbox w-6 h-6 rounded" type="checkbox" wire:model.defer="farm.isBio">
