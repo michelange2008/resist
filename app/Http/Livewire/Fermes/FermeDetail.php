@@ -21,6 +21,7 @@ class FermeDetail extends Component
     public $edit, $addTroupeau;
     public $farm = [];
     public $herd = [];
+    public $animaux = [];
     public $animal;
     public $communes;
     public $cps;
@@ -61,7 +62,6 @@ class FermeDetail extends Component
     
         $this->cp = $this->ferme->commune->Codepos;
         $this->farm = $this->ferme->toArray();
-
         array_pop($this->farm);
     }
 
@@ -100,9 +100,14 @@ class FermeDetail extends Component
 
     function addAnimal()
     {
-        $animaux = [];
-        $animaux[] = $this->animal;
-        $this->herd['animaux'] = $animaux;
+        array_push($this->animaux, $this->animal);
+        $this->animal = '';
+    }
+
+    function delAnimal($animal)
+    {
+        unset($this->animaux[array_search($animal, $this->animaux)]);   
+
     }
 
     public function render()

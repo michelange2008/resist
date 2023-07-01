@@ -1,4 +1,4 @@
-<div x-data="{ addTroupeau: @entangle('addTroupeau'), herd: @entangle('herd') }">
+<div x-data="{ addTroupeau: @entangle('addTroupeau'), herd: @entangle('animaux') }">
 
     <h2 class="h2 mb-3">Les troupeaux</h2>
     @foreach ($ferme->troupeaus as $troupeau)
@@ -82,18 +82,24 @@
     <div class="p-5">
         <label>Animaux</label>
         <div class="flex flex-row gap-2">
-            <input type="number" wire:model = "animal">
+            <input type="number" wire:model.defer="animal" wire:keydown.enter="addAnimal()">
             <div 
                 class="w-10 p-1 rounded-md bg-gray-500 cursor-pointer hover:invert active:border-2 active:border-spacing-4"
-                wire:click="addAnimal"
+                wire:click="addAnimal()"
+                
             >
                 <img src="{{ url('storage/img/add.svg')}}" alt="">
             </div>
-            @if (array_key_exists('animaux', $herd))
-                @foreach ($herd['animaux'] as $animal)
-                    <span>{{ $animal }}</span>
-                @endforeach
-            @endif
+        </div>
+        <div class="my-3 flex flex-row gap-3">
+            @foreach ($animaux as $animal)
+            <div title="clickez pour supprimer" 
+                class="cursor-pointer p-1 border-2 hover:text-red-200 hover:bg-gray-800"
+                wire:click="delAnimal( {{ $animal }} )"
+            >
+                {{ $animal }}
+            </div>
+            @endforeach
         </div>
     </div>
 
