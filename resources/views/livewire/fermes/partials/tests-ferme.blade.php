@@ -4,10 +4,10 @@
 
     @include('livewire.tests.partials.tests-index-thead')
 
-    @foreach ($tests as $test)
+    @foreach ($ferme->tests as $test)
 
-    @include('livewire.tests.partials.tests-index-rows')
-
+        @include('livewire.tests.partials.tests-index-rows')
+        
     @endforeach
 
 </table>

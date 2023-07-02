@@ -23,7 +23,7 @@
             </div>
 
             <div class="my-3 p-5 bg-white overflow-hidden shadow-sm sm:rounded-lg text-xl">
-
+                    
                 @include('livewire.fermes.partials.tests-ferme')
 
             </div>

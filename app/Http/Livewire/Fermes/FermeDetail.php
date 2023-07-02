@@ -14,6 +14,7 @@ use Livewire\Component;
 class FermeDetail extends Component
 {
     public Ferme $ferme;
+    public $troupeaux;
     public $animals;
     public $tests;
     public $especes;
@@ -50,9 +51,14 @@ class FermeDetail extends Component
 
     function mount() 
     {
-        $troupeau_ids = Troupeau::where('ferme_id', $this->ferme->id)->pluck('id');
-        $this->tests = Test::whereIn('troupeau_id', $troupeau_ids )->get();
-        $this->animals = Animal::whereIn('troupeau_id',  $troupeau_ids)->get();
+        $this->troupeaux = Troupeau::where('ferme_id', $this->ferme->id)->get();
+        if ($this->troupeaux != null) {
+            foreach ($this->troupeaux as $troupeau)
+            {
+                $troupeau->animals = Animal::where('troupeau_id', $troupeau->id)->get();
+                $troupeau->tests = Test::where('troupeau_id', $troupeau->id)->get();
+            }
+        }
         $this->edit = false;
         $this->addTroupeau = false;
         $this->communes = Commune::all();
@@ -83,24 +89,29 @@ class FermeDetail extends Component
         $this->edit = false;
     }
 
-    function addTroupeau()
+    function storeTroupeau(Ferme $ferme)
     {
-
+        $this->herd['ferme_id'] = $ferme->id;
+        Troupeau::create($this->herd);
+        $this->ferme = Ferme::find($ferme->id);
+        $this->addTroupeau = false;
     }
 
     function choixEspece(Espece $espece)
     {
-        $this->herd['espece'] = $espece->id;
+        $this->herd['espece_id'] = $espece->id;
     }
 
     function choixProduction(Production $production)
     {
-        $this->herd['production'] = $production->id;    
+        $this->herd['production_id'] = $production->id;    
     }
 
     function addAnimal()
     {
-        array_push($this->animaux, $this->animal);
+        if ($this->animal != null) {
+            array_push($this->animaux, $this->animal);
+        }
         $this->animal = '';
     }
 
