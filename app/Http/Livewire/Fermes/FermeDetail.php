@@ -131,6 +131,7 @@ class FermeDetail extends Component
     function delAnimal($animal)
     {
         unset($this->animaux[array_search($animal, $this->animaux)]);   
+        $this->ferme = Ferme::find($this->ferme->id);
 
     }
 

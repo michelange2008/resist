@@ -2,15 +2,15 @@
     <div x-show="!addTroupeau">
         <h2 class="h2 mb-3">Les troupeaux</h2>
         @foreach ($ferme->troupeaus as $troupeau)
-            <div class="py-3 border-b-4 border-gray-300 relative">
-                <div class="absolute right-0 p-1 cursor-pointer hover:border-2" title="Cliquez pour supprimer le troupeau"
+            <div class="p-3 my-1 bg-gray-200 relative">
+                <div class="absolute right-0 px-2 cursor-pointer hover:border-2"
+                    title="Cliquez pour supprimer le troupeau"
                     onclick="confirm('Sûr de vouloir supprimmer ce troupeau ?') || event.stopImmediatePropagation()"
                     wire:click.prevent="delTroupeau({{ $troupeau }})">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
-
                 </div>
                 <div class="my-3 flex flex-row gap-5 align-bottom ">
                     <img class="w-20" src="{{ url('storage/img/' . $troupeau->espece->icone) }}" alt="espece">
@@ -18,9 +18,14 @@
                     <p>{{ $troupeau->effectif }} {{ $troupeau->espece->nom }} </p>
                 </div>
                 <div class="bg-gray-200  p-3">
-                    @if ($troupeau->animals->count() > 0)
-                        <p class="pb-3 underline">Liste des animaux</p>
-                        <div class="px-1 grid grid-rows-4 grid-cols-5 grid-flow-col gap-2">
+                    @if ($troupeau->animals->count() > 1)
+                    <p class="pb-3 underline">{{ $troupeau->animals->count() }} animaux</p>
+                    @elseif ($troupeau->animals->count() == 1)
+                    <p class="pb-3 underline">Un animal</p>
+                    @else
+                    <p class="pb-3 underline">Aucun animal</p>
+                    @endif
+                        <div class="px-1 grid grid-flow-row-dense grid-cols-5 gap-2">
                             @foreach ($troupeau->animals as $animal)
                                 <div class="flex flex-row gap-2 group">
                                     {{ $animal->numero }}
@@ -36,21 +41,18 @@
                             x-on:click="open = {{ $troupeau->id }}" x-show="open==false">
                             ajouter ...
                         </div>
-                        <div x-show="open == {{ $troupeau->id }}">
-                            <p x-on:click="open=false"
-                                class="cursor-pointer text-gray-600 hover:text-black active:underline">terminer</p>
-                            <input type="text" wire:model="newAnimal"
-                                wire:keydown.enter="addAnimalToTroupeau({{ $troupeau }})">
-                        </div>
-                    @else
-                        <p class="pb-3 text-gray-600 cursor-pointer hover:text-black active:underline">Ajouter des
-                            animaux</p>
-                    @endif
+
+                    <div x-show="open == {{ $troupeau->id }}">
+                        <p x-on:click="open=false" x-on:keyup.escape="open=false"
+                            class="cursor-pointer text-gray-600 hover:text-black active:underline">terminer</p>
+                        <input type="text" wire:model="newAnimal"
+                            wire:keydown.enter="addAnimalToTroupeau({{ $troupeau }})">
+                    </div>
                 </div>
             </div>
         @endforeach
 
-        <div x-on:click="addTroupeau = true" class="mt-2 flex flex-row gap-1 items-center group">
+        <div x-on:click="addTroupeau = true" class="mt-2 p-1 flex flex-row gap-1 items-center group">
             <div class="cursor-pointer rounded-full p-1 bg-slate-500 text-slate-500 group-hover:invert">
                 <img class="w-6" src="{{ url('storage/img/add.svg') }}" alt="add">
             </div>
