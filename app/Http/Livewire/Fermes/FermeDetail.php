@@ -24,6 +24,7 @@ class FermeDetail extends Component
     public $herd = [];
     public $animaux = [];
     public $animal;
+    public $newAnimal;
     public $communes;
     public $cps;
     public $cp;
@@ -74,8 +75,9 @@ class FermeDetail extends Component
     function updated()
     {
         $this->cps = Commune::select('Codepos')->groupBy('Codepos')->get();
+        $this->communes = Commune::where('Codepos', $this->cp)->get();
+        $this->troupeaux = Troupeau::where('ferme_id', $this->ferme->id)->get();
 
-        $this->communes = Commune::where('Codepos', $this->cp)->get();    
     }
 
     function update(Ferme $ferme)
@@ -92,9 +94,20 @@ class FermeDetail extends Component
     function storeTroupeau(Ferme $ferme)
     {
         $this->herd['ferme_id'] = $ferme->id;
-        Troupeau::create($this->herd);
+        $troupeau = Troupeau::create($this->herd);
         $this->ferme = Ferme::find($ferme->id);
+        foreach ($this->animaux as $animal) {
+            Animal::create([
+                'numero' => $animal,
+                'troupeau_id' => $troupeau->id]);
+        }
         $this->addTroupeau = false;
+    }
+
+    function delTroupeau(Troupeau $troupeau)
+    {
+        Troupeau::destroy($troupeau->id);    
+        $this->ferme = Ferme::find($this->ferme->id);
     }
 
     function choixEspece(Espece $espece)
@@ -118,6 +131,24 @@ class FermeDetail extends Component
     function delAnimal($animal)
     {
         unset($this->animaux[array_search($animal, $this->animaux)]);   
+
+    }
+
+    function addAnimalToTroupeau(Troupeau $troupeau)
+    {
+        Animal::create([
+            'numero' => $this->newAnimal,
+            'troupeau_id' => $troupeau->id,
+        ]);
+        $this->ferme = Ferme::find($this->ferme->id);
+        $this->newAnimal = '';
+
+    }
+
+    function delAnimalFromTroupeau(Animal $animal)
+    {
+        Animal::destroy($animal->id);
+        $this->ferme = Ferme::find($this->ferme->id);
 
     }
 
