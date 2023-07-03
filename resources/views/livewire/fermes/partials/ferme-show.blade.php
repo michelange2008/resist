@@ -1,4 +1,4 @@
-<div class="flex flex-row gap-3 cursor-pointer" x-on:click="edit = true">
+<div class="flex flex-row gap-3 cursor-pointer" x-on:click="editFerme = true">
 
     <h2 class="h2 text-gray-500">L'exploitation</h2>
     <x-icones.edit/>

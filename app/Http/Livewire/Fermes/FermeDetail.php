@@ -9,25 +9,25 @@ use App\Models\Ferme;
 use App\Models\Production;
 use App\Models\Test;
 use App\Models\Troupeau;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class FermeDetail extends Component
 {
     public Ferme $ferme;
-    public $troupeaux;
-    public $animals;
-    public $tests;
-    public $especes;
-    public $productions;
-    public $edit, $addTroupeau;
-    public $farm = [];
-    public $herd = [];
-    public $animaux = [];
-    public $animal;
-    public $newAnimal;
-    public $communes;
-    public $cps;
-    public $cp;
+    public $troupeaux; // Troupeaux de la ferme
+    public $especes; // Liste des especes
+    public $productions; // Liste des productions
+    public $editFerme, $addTroupeau; // Booléens destinés à afficher masquer les formulaires
+    public $farm = []; // Données du modèle ferme pendant modifications
+    public $herd = []; // Données du modèle troupeau pendant création et/ou modifications
+    public $animaux = []; // Liste d'animaux (création ou modification d'un troupeau, ajout d'animaux)
+    public $animal; // Utilisé comme modèle Animal lors de la création d'un troupeau
+    public $newAnimal; // Utilisé comme modèle Animal lors de l'ajout d'un animal à un troupeau
+    public $animalTest; // Animal qui a participé à un test de résistance
+    public $communes; // Liste de communes (modèle Commune)
+    public $cps; // Liste des codes postaux (modèle Commune)
+    public $cp; // Code postal de la ferme
 
     protected $rules = [
         'farm.nom' => 'required|string|max:191',
@@ -48,26 +48,23 @@ class FermeDetail extends Component
         'farm.isBio' => 'BIO',
         'farm.longitude' => 'Longitude',
         'farm.latitude' => 'Latitude',
-   ];
+    ];
 
-    function mount() 
+    function mount()
     {
-        $this->troupeaux = Troupeau::where('ferme_id', $this->ferme->id)->get();
-        if ($this->troupeaux != null) {
-            foreach ($this->troupeaux as $troupeau)
-            {
-                $troupeau->animals = Animal::where('troupeau_id', $troupeau->id)->get();
-                $troupeau->tests = Test::where('troupeau_id', $troupeau->id)->get();
-            }
-        }
-        $this->edit = false;
+        // Liste des animaux ayant participé à un test pour empêcher leur suppression
+        $this->animalTest = DB::table('animal_test')->select('animal_id')->get();
+
+        $this->editFerme = false;
         $this->addTroupeau = false;
-        $this->communes = Commune::all();
+
         $this->especes = Espece::all();
         $this->productions = Production::all();
+        
+        $this->communes = Commune::all();
         $this->cps = Commune::select('Codepos')->groupBy('Codepos')->get();
-    
         $this->cp = $this->ferme->commune->Codepos;
+
         $this->farm = $this->ferme->toArray();
         array_pop($this->farm);
     }
@@ -77,7 +74,6 @@ class FermeDetail extends Component
         $this->cps = Commune::select('Codepos')->groupBy('Codepos')->get();
         $this->communes = Commune::where('Codepos', $this->cp)->get();
         $this->troupeaux = Troupeau::where('ferme_id', $this->ferme->id)->get();
-
     }
 
     function update(Ferme $ferme)
@@ -88,7 +84,29 @@ class FermeDetail extends Component
 
         Ferme::where('id', $ferme->id)->update($this->farm);
         $this->ferme = Ferme::find($ferme->id);
-        $this->edit = false;
+        $this->editFerme = false;
+    }
+
+    function updateEffectif(Troupeau $troupeau)
+    {
+        if (array_key_exists('effectif', $this->herd)) {
+            $this->validate();
+            Troupeau::where('id', $troupeau->id)->update($this->herd);
+            $this->ferme = Ferme::find($this->ferme->id);
+            $this->herd = [];
+        }
+    }
+
+    function updateEspece(Troupeau $troupeau, Espece $espece)
+    {
+        Troupeau::where('id', $troupeau->id)->update(['espece_id' => $espece->id]);
+        $this->ferme = Ferme::find($this->ferme->id);
+    }
+
+    function updateProduction(Troupeau $troupeau, Production $production)
+    {
+        Troupeau::where('id', $troupeau->id)->update(['production_id' => $production->id]);
+        $this->ferme = Ferme::find($this->ferme->id);
     }
 
     function storeTroupeau(Ferme $ferme)
@@ -99,14 +117,15 @@ class FermeDetail extends Component
         foreach ($this->animaux as $animal) {
             Animal::create([
                 'numero' => $animal,
-                'troupeau_id' => $troupeau->id]);
+                'troupeau_id' => $troupeau->id
+            ]);
         }
         $this->addTroupeau = false;
     }
 
     function delTroupeau(Troupeau $troupeau)
     {
-        Troupeau::destroy($troupeau->id);    
+        Troupeau::destroy($troupeau->id);
         $this->ferme = Ferme::find($this->ferme->id);
     }
 
@@ -117,7 +136,7 @@ class FermeDetail extends Component
 
     function choixProduction(Production $production)
     {
-        $this->herd['production_id'] = $production->id;    
+        $this->herd['production_id'] = $production->id;
     }
 
     function addAnimal()
@@ -130,9 +149,8 @@ class FermeDetail extends Component
 
     function delAnimal($animal)
     {
-        unset($this->animaux[array_search($animal, $this->animaux)]);   
+        unset($this->animaux[array_search($animal, $this->animaux)]);
         $this->ferme = Ferme::find($this->ferme->id);
-
     }
 
     function addAnimalToTroupeau(Troupeau $troupeau)
@@ -143,14 +161,16 @@ class FermeDetail extends Component
         ]);
         $this->ferme = Ferme::find($this->ferme->id);
         $this->newAnimal = '';
-
     }
 
     function delAnimalFromTroupeau(Animal $animal)
     {
-        Animal::destroy($animal->id);
+        try {
+            Animal::destroy($animal->id);
+        } catch (\Throwable $th) {
+            
+        }
         $this->ferme = Ferme::find($this->ferme->id);
-
     }
 
     public function render()

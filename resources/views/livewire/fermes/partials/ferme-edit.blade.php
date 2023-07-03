@@ -34,7 +34,7 @@
     <x-icones.edit></x-icones.edit> Mettre à jour
 </x-buttons.success-button>
 
-<x-buttons.reset-button x-on:click="edit = false">
+<x-buttons.reset-button x-on:click="editFerme = false">
     <x-icones.return></x-icones.return> Annuler
 </x-buttons.reset-button>
 
