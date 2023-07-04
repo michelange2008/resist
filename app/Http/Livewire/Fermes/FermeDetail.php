@@ -9,7 +9,6 @@ use App\Models\Ferme;
 use App\Models\Production;
 use App\Models\Test;
 use App\Models\Troupeau;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class FermeDetail extends Component
@@ -24,7 +23,6 @@ class FermeDetail extends Component
     public $animaux = []; // Liste d'animaux (création ou modification d'un troupeau, ajout d'animaux)
     public $animal; // Utilisé comme modèle Animal lors de la création d'un troupeau
     public $newAnimal; // Utilisé comme modèle Animal lors de l'ajout d'un animal à un troupeau
-    public $animalTest; // Animal qui a participé à un test de résistance
     public $communes; // Liste de communes (modèle Commune)
     public $cps; // Liste des codes postaux (modèle Commune)
     public $cp; // Code postal de la ferme
@@ -52,9 +50,6 @@ class FermeDetail extends Component
 
     function mount()
     {
-        // Liste des animaux ayant participé à un test pour empêcher leur suppression
-        $this->animalTest = DB::table('animal_test')->select('animal_id')->get();
-
         $this->editFerme = false;
         $this->addTroupeau = false;
 

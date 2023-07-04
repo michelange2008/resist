@@ -1,6 +1,9 @@
-<h2 class="h2 mb-3">Les tests</h2>
+<div class="flex flex-row gap-3 items-center">
+    <img class="w-20 invert" src="{{ url('storage/img/tests.svg')}}" alt="">
+    <h2 class="mb-3 h2">Les tests</h2>
+</div>
 
-<table class="min-w-full text-left text-sm font-light">
+<table class="min-w-full text-sm font-light text-left">
 
     @include('livewire.tests.partials.tests-index-thead')
 
