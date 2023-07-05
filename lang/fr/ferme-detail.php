@@ -1,6 +1,7 @@
 <?php
 return [
     'farm' => "L'exploitation",
+    'farms_list' => "Liste des exploitations",
     'farmName' => "Nom de l'exploitation",
     'farmEdit' => "Modifier l'exploitation",
     'email' => "Email:",
