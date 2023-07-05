@@ -16,7 +16,7 @@
                         </thead>
                         <tbody>
                             @foreach ($fermes as $ferme)
-                                <tr class="group hover:bg-slate-200">
+                                <tr class="group">
                                     <td class="align-top cursor-pointer td group-hover:font-bold" 
                                         wire:click="fermeDetail( {{ $ferme }} )"
                                         title="Cliquer pour afficher le détail de cette exploitation">
