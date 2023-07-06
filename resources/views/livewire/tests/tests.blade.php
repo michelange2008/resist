@@ -1,16 +1,22 @@
-<div x-data="{ index: @entangle('index'), create: @entangle('create') , detail: @entangle('detail')}">
+<div x-data="{ index: @entangle('index'), create: @entangle('create') }">
 
-    <div class="pT-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <h2 class="h2 text-gray-800 leading-tight py-2 border-b-4">
+    <div class="mx-auto max-w-7xl pT-6 sm:px-6 lg:px-8">
+        <h2 class="py-2 leading-tight text-gray-800 border-b-4 h2">
             <div x-show="index">{{ __('commun.tests') }}</div>
             <div x-show="create">{{ __('commun.new_test') }}</div>
-            <div x-show="detail">test</div>
         </h2>
     </div>
 
+    <div class="mx-auto my-3 max-w-7xl pT-6 sm:px-6 lg:px-8">
+        <input type="text" 
+            placeholder="Chercher un produit ..."
+            wire:model="search"
+            class="w-full rounded form-input border-1 focus:active:border-0">
+    </div>
+
     <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div x-show="index">
                     @include('livewire.tests.partials.tests-index')
                 </div>
@@ -18,9 +24,7 @@
             <div x-show="create">
                 @include('livewire.tests.partials.test-create')
             </div>
-            <div x-show="detail">
-                @include('livewire.tests.partials.test-show')
-            </div>
+
         </div>
     </div>
 

@@ -1,6 +1,10 @@
 <div x-show="addTroupeau">
     <h2 class="mb-3 h2">@lang('ferme-detail.newTroupeau')</h2>
-
+    <div class="w-full lg:w-1/3 md:w-2/3">
+        <x-forms.input :label="__('ferme-detail.nomTroupeau')" model="herd.nom"/>
+    </div>
+    
+    
     <div class="p-5 md:grid md:grid-cols-2 lg:grid-cols-6 md:gap-2">
         <div class="lg:col-span-3">
             <label>@lang('ferme-detail.espece')</label>
@@ -14,6 +18,8 @@
                             wire:click="choixEspece({{ $espece }})">
                     </button>
                 @endforeach
+                {{-- Champs caché pour avoir un message d'erreur si aucune icone n'a été sélectionnée --}}
+                <x-forms.input type='hidden' label='' model="herd.espece_id"/>
             </div>
         </div>
 
@@ -29,6 +35,8 @@
                             alt="{{ $production->nom }}" wire:click="choixProduction({{ $production }})">
                     </button>
                 @endforeach
+                {{-- Champs caché pour avoir un message d'erreur si aucune icone n'a été sélectionnée --}}
+                <x-forms.input type='hidden' label='' model="herd.production_id"/>
             </div>
         </div>
 

@@ -5,6 +5,7 @@
     addTroupeau: @entangle('addTroupeau'),
     herd: @entangle('animaux'),
     open: false,
+    nom: false,
     effectif: false,
     production: false,
     espece: false
@@ -36,6 +37,15 @@
                         <x-icones.bubble/>
                     </div>
                 @endif
+                
+                {{-- Nom du troupeau avec un input non visible pour le modifier --}}
+                <p class="cursor-pointer" x-show="!nom" x-on:click="nom = {{$troupeau->id }}">
+                    {{ $troupeau->nom }}
+                </p>
+                <input type='text' x-show="nom == {{ $troupeau->id }}" @click.outside="nom = false"
+                    wire:model="herd.nom" wire:keyup.enter="updateNomTroupeau( {{ $troupeau }} )" 
+                    x-on:keyup.enter="nom=false" />
+                
                 {{-- Affichage sous fourme d'icone de l'espece et de la production, 
                 et l'effectif sous forme de chiffre. 
                 En cliquant dessus on peut les modifier (cf comment du dessous) --}}
@@ -72,6 +82,7 @@
                     @endforeach
                 </div>
 
+                {{-- Effectif du troupeau avec un input non visible pour pouvoir le modifier --}}
                 <div class="flex flex-row flex-wrap gap-1" x-show="espece=={{ $troupeau->id }}"
                     @click.outside="espece = false">
                     @foreach ($especes as $espece)
@@ -83,6 +94,7 @@
                         </button>
                     @endforeach
                 </div>
+
                 {{-- Affichage de la liste des animaux avec possibilité de les supprimer
                     (sauf s'ils sont inclus dans un test) --}}
                 <div class="p-3 bg-gray-200">
@@ -131,6 +143,7 @@
                 </div>
             </div>
         @endforeach
+        
         {{-- Texte cliquable qui permet d'ajouter un troupeau en masquant les troupeaux existants 
         et en affichant troupeau-add qui est un formulaire --}}
         <div x-on:click="addTroupeau = true" class="flex flex-row gap-1 items-center p-1 mt-2 group">

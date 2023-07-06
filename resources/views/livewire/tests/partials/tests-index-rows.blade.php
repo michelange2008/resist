@@ -1,6 +1,6 @@
 <tr
-@if ($test->efficacite < 95) class="group border-b bg-red-100 hover:bg-red-500 hover:text-white"
-@else class="group border-b bg-emerald-100 hover:bg-emerald-500 hover:text-white" @endif>
+@if ($test->efficacite < 95) class="bg-red-100 border-b group hover:bg-red-500 hover:text-white"
+@else class="bg-emerald-100 border-b group hover:bg-emerald-500 hover:text-white" @endif>
 
 <td class="td">{{ \Carbon\Carbon::parse($test->T0)->format('d/m/Y') }}</td>
 
@@ -9,7 +9,7 @@
         src="{{ url('storage/img/' . $test->troupeau->espece->icone) }}" alt="">
 </td>
 
-<td class="td font-bold">{{ $test->anthelm->nom }}</td>
+<td class="font-bold td">{{ $test->anthelm->nom }}</td>
 
 <td class="td">
     @include('components.affiche-liste-items', [
@@ -18,22 +18,22 @@
     ])
 </td>
 
-<td class="td font-bold text-base">{{ $test->efficacite }} %</td>
+<td class="text-base font-bold td">{{ $test->efficacite }} %</td>
 
-<td class="td font-bold text-base text-center">
+<td class="text-base font-bold text-center td">
     {{ $test->animals()->count() }}
 </td>
 
-<td class="td group-hover:text-white font-bold text-base text-green-900 cursor-pointer">
-    <div wire:click="show( {{ $test }} )">
+<td class="text-base font-bold text-green-900 cursor-pointer td group-hover:text-white">
+    <a href="{{ route('test.show', $test)}}">
         <x-icones.link />
-    </div>
+    </a>    
 
 </td>
 
 <td onclick="confirm('Sûr de vouloir supprimmer cet item ?') || event.stopImmediatePropagation()"
     wire:click.prevent="del({{ $test }})"
-    class="td group-hover:text-white font-bold text-base text-red-900 cursor-pointer">
+    class="text-base font-bold text-red-900 cursor-pointer td group-hover:text-white">
     <x-icones.del />
 </td>
 

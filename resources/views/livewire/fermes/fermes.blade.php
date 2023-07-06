@@ -16,7 +16,7 @@
                         </thead>
                         <tbody>
                             @foreach ($fermes as $ferme)
-                                <tr class="group">
+                                <tr class="group hover:bg-gray-100">
                                     <td class="align-top cursor-pointer td group-hover:font-bold" 
                                         wire:click="fermeDetail( {{ $ferme }} )"
                                         title="Cliquer pour afficher le détail de cette exploitation">
@@ -25,7 +25,11 @@
                                     <td class="align-top td">{{ $ferme->commune->Commune }} ({{ $ferme->commune->Departement}})</td>
                                     <td class="flex flex-row gap-3 td">
                                         @foreach ($ferme->troupeaus as $troupeau)
-                                            <img class="p-1 w-10" src="{{ url('storage/img/'.$troupeau->espece->icone)}}" alt="{{ $troupeau->espece->nom }}">
+                                            <img class="p-1 w-10" 
+                                                src="{{ url('storage/img/'.$troupeau->espece->icone)}}" 
+                                                alt="{{ $troupeau->espece->nom }}"
+                                                title="{{ $troupeau->nom}} ( {{ $troupeau->effectif }} )"
+                                                >
                                         @endforeach
                                     </td>
                                     <td class="td">
@@ -33,9 +37,11 @@
                                             -
                                         @else
                                             @foreach ($ferme->tests as $test)
-                                            <p class="py-2">
-                                                {{ $test->anthelm->nom }} ({{ $test->efficacite}}%)
-                                            </p>
+                                            <a href=" {{ route('test.show', $test) }} ">
+                                                <p class="py-2">
+                                                    {{ $test->anthelm->nom }} ({{ $test->efficacite}}%)
+                                                </p>
+                                            </a>
                                             @endforeach
                                         @endif
                                     </td>

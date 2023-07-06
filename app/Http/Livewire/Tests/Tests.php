@@ -5,10 +5,9 @@ namespace App\Http\Livewire\Tests;
 use App\Models\Animal;
 use App\Models\Anthelm;
 use App\Models\Ferme;
+use App\Models\Molecule;
 use App\Models\Test;
 use App\Models\Troupeau;
-use Carbon\Carbon;
-use Illuminate\Auth\Events\Validated;
 use Livewire\Component;
 
 class Tests extends Component
@@ -20,13 +19,12 @@ class Tests extends Component
     public $fermes;
     public $ferme;
     public $animals;
-    public $detail;
     public $create;
     public $index;
     public $T0, $T1, $opg0, $opg1, $troupeau_id, $anthelm_id, $efficacite;
     public $state = [];
     public $ax = [];
-    public $intervalle;
+    public $search = '';
 
     protected $rules = [
         'T0' => 'required|date',
@@ -52,20 +50,8 @@ class Tests extends Component
         $this->animals = Animal::orderBy('troupeau_id')->get();
 
         $this->index = true;
-        $this->detail = false;
         $this->create = false;
-
         $this->tests = Test::orderBy('T0', 'DESC')->get();    
-    }
-
-    function show(Test $test)
-    {
-        
-        $this->test = $test;
-        $this->intervalle = Carbon::parse($test->T1)->diffInDays($test->T0);
-        $this->mount();    
-        $this->index = false;
-        $this->detail = true;
     }
 
     function create()
@@ -83,6 +69,8 @@ class Tests extends Component
     }
 
     function updated() {
+        $searchAnthelms = Anthelm::where('nom', 'like', '%'.$this->search.'%' )->pluck('id');
+        $this->tests = Test::whereIn('anthelm_id', $searchAnthelms)->orderBy('T0', 'DESC')->get();
         $this->troupeaus = Troupeau::where('ferme_id', $this->ferme)->get();
         if ( $this->troupeau_id != null )
         {

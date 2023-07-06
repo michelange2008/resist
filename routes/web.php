@@ -6,6 +6,7 @@ use App\Http\Livewire\Fermes\Fermes;
 use App\Http\Livewire\Fermes\FermeDetail;
 use App\Http\Livewire\ItemsFactory;
 use App\Http\Livewire\Tests\Tests;
+use App\Http\Livewire\Tests\TestShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('posologie/edit/{anthelm}/{espece}', [PosologieController::class, 'edit'])->name('posologie.edit');
     Route::post('posologie/update', [PosologieController::class, 'update'])->name('posologie.update');
     Route::get('tests', Tests::class)->name('tests');
-    Route::get('tests/{test}', [Tests::class, 'show'])->name('tests.show');
+    Route::get('tests/{test}', TestShow::class)->name('test.show');
     Route::get('fermes', Fermes::class)->name('fermes');
     Route::get('ferme/{ferme}', FermeDetail::class)->name('ferme');
 });

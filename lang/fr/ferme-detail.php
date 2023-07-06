@@ -4,6 +4,8 @@ return [
     'farms_list' => "Liste des exploitations",
     'farmName' => "Nom de l'exploitation",
     'farmEdit' => "Modifier l'exploitation",
+    'nomTroupeau' => "Nom du nouveau troupeau",
+    'newNomTroupeau' => "Nouveau nom",
     'email' => "Email:",
     'mail' => "Adresse électronique",
     'adresse' => "Adresse:",

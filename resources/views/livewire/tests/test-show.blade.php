@@ -1,7 +1,10 @@
+{{-- Présente le détail d'un test --}}
 <div class="py-2 bg-transparent">
-    <div class=" px-5 bg-slate-100">
+    <div class="px-5 bg-slate-100">
 
         @if ($test != null)
+        
+        {{-- Anthelminthique utilisé et nom de la/les molécules.s --}}
             <div class="mb-4">
                 <h2 class="h2">{{ $test->anthelm->nom }}</h2>
                 @foreach ($test->anthelm->molecules as $molecule)
@@ -12,12 +15,16 @@
                 @endforeach
             </div>
 
+            {{-- Nom de l'exploitation avec lien cliquable vers l'exploitation.
+            Liste des animaux testés et date du test --}}
             <div class="my-3">
                 <img class="w-20" src="{{ url('storage/img/' . $test->troupeau->espece->icone) }}"
                     alt="{{ $test->troupeau->espece->nom }}">
-                <p class="font-bold text-lg text-green-700">{{ $test->troupeau->ferme->nom }}
-                    ({{ $test->troupeau->nom }})
-                </p>
+                <a href=" {{ route('ferme', $test->troupeau->ferme)}}">
+                    <p class="text-lg font-bold text-green-700">{{ $test->troupeau->ferme->nom }}
+                        ({{ $test->troupeau->nom }})
+                    </p>
+                </a>
                 <p>
                     @if ($test->animals->count() == 0)
                         Aucun animal testé
@@ -36,20 +43,17 @@
                 <p>Traitement réalisé le {{ \Carbon\Carbon::parse($test->T0)->format('d/m/Y') }}</p>
             </div>
 
+            {{-- Résultat du test --}}
             <div class="my-3">
-                <div class="bg-slate-300 px-2 py-5 rounded-r-full w-12/12">Avant le traitement:
+                <div class="px-2 py-5 rounded-r-full bg-slate-300 w-12/12">Avant le traitement:
                     {{ $test->opg0 }} opg</div>
             </div>
             <div class="my-3">
                 @include('livewire.tests.partials.graph-fer')
             </div>
-            <div class="my-3 font-bold text-3xl">{{ $test->efficacite }}% d'efficacité</div>
+            <div class="my-3 text-3xl font-bold">{{ $test->efficacite }}% d'efficacité</div>
         @endif
 
     </div>
-    <div class="mt-5 px-5" x-on:click="detail = false, index = true">
-        <x-buttons.reset-button>
-            <x-icones.return /> Retour
-        </x-buttons.reset-button>
-    </div>
+
 </div>
