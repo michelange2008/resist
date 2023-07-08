@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Tests;
 
 use App\Models\Animal;
 use App\Models\Anthelm;
+use App\Models\Espece;
 use App\Models\Ferme;
 use App\Models\Molecule;
 use App\Models\Test;
@@ -18,6 +19,7 @@ class Tests extends Component
     public $anthelms;
     public $fermes;
     public $ferme;
+    public $especes;
     public $animals;
     public $create;
     public $index;
@@ -25,6 +27,8 @@ class Tests extends Component
     public $state = [];
     public $ax = [];
     public $search = '';
+    public $orderBy = 'T0';
+    public $sensTri = "DESC";
 
     protected $rules = [
         'T0' => 'required|date',
@@ -48,10 +52,17 @@ class Tests extends Component
         $this->fermes = Ferme::orderBy('nom')->get();
         $this->troupeaus = Troupeau::orderBy('ferme_id')->get();
         $this->animals = Animal::orderBy('troupeau_id')->get();
-
+        $this->especes = Espece::all();
         $this->index = true;
         $this->create = false;
-        $this->tests = Test::orderBy('T0', 'DESC')->get();    
+        $this->getTests();
+    }
+
+    function getTests()
+    {
+        $searchAnthelms = Anthelm::where('nom', 'like', '%'.$this->search.'%' )->pluck('id');
+        $this->tests = Test::whereIn('anthelm_id', $searchAnthelms)
+            ->orderBy($this->orderBy, $this->sensTri)->get();
     }
 
     function create()
@@ -65,12 +76,11 @@ class Tests extends Component
     {
         $test->animals()->detach();
         Test::destroy($test->id);   
-        $this->tests = Test::orderBy('T0', 'DESC')->get();    
+        $this->getTests();
     }
 
     function updated() {
-        $searchAnthelms = Anthelm::where('nom', 'like', '%'.$this->search.'%' )->pluck('id');
-        $this->tests = Test::whereIn('anthelm_id', $searchAnthelms)->orderBy('T0', 'DESC')->get();
+        $this->getTests();
         $this->troupeaus = Troupeau::where('ferme_id', $this->ferme)->get();
         if ( $this->troupeau_id != null )
         {
@@ -97,7 +107,7 @@ class Tests extends Component
         $this->create = false;
         $this->index = true;
         
-        $this->tests = Test::orderBy('T0', 'DESC')->get();    
+        $this->getTests();
     }
 
     function calculEfficacite(): void
@@ -110,6 +120,22 @@ class Tests extends Component
         }
     
     }
+
+    function sort($col){
+        $this->sensTri = ($this->sensTri == "DESC") ? "ASC" : "DESC";
+        $this->orderBy = $col;
+        $this->getTests();
+    }
+
+    function afficheEspece(Espece $espece)
+    {
+        
+        $troupeaux = Troupeau::where('espece_id', $espece->id)->pluck('id');
+        $this->tests = Test::whereIn('troupeau_id', $troupeaux)
+            ->orderBy($this->orderBy, $this->sensTri)->get();
+
+    }
+
     public function render()
     {
         return view('livewire.tests.tests');

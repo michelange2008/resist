@@ -27,4 +27,5 @@ return [
     'production' => "Production",
     'effectif' => "Effectif",
     'animaux' => "Animaux",
+    'tests' => "Les tests",
 ];

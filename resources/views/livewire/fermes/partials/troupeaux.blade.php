@@ -44,7 +44,7 @@
                 </p>
                 <input type='text' x-show="nom == {{ $troupeau->id }}" @click.outside="nom = false"
                     wire:model="herd.nom" wire:keyup.enter="updateNomTroupeau( {{ $troupeau }} )" 
-                    x-on:keyup.enter="nom=false" />
+                    x-on:keyup.enter="nom=false" x-cloak/>
                 
                 {{-- Affichage sous fourme d'icone de l'espece et de la production, 
                 et l'effectif sous forme de chiffre. 
@@ -64,13 +64,13 @@
                         {{-- champ pour modifier l'effectif après avoir cliqué sur l'effectif --}}
                         <input x-show="effectif == {{ $troupeau->id }}" type="number" @click.outside="effectif = false"
                             wire:model='herd.effectif' wire:keyup.enter="updateEffectif( {{ $troupeau }} )"
-                            x-on:keyup.enter="effectif=false">
+                            x-on:keyup.enter="effectif=false" x-cloak>
                     </div>
                 </div>
                 {{-- Affichage des icones "espece" ou "production" pour en changer après avoir cliquer
                 sur l'icone de l'espèce ou de la production --}}
                 <div class="flex flex-row flex-wrap gap-1" x-show="production=={{ $troupeau->id }}"
-                    @click.outside="production = false">
+                    @click.outside="production = false" x-cloak>
                     @foreach ($productions as $production)
                         <button title="cliquer pour changer de production:"
                             class="p-2 cursor-pointer hover:bg-gray-300 active:bg-green-300">
@@ -84,7 +84,7 @@
 
                 {{-- Effectif du troupeau avec un input non visible pour pouvoir le modifier --}}
                 <div class="flex flex-row flex-wrap gap-1" x-show="espece=={{ $troupeau->id }}"
-                    @click.outside="espece = false">
+                    @click.outside="espece = false" x-cloak>
                     @foreach ($especes as $espece)
                         <button class="p-2 cursor-pointer hover:bg-gray-300 active:bg-green-300">
                             <img class="w-10" src="{{ url('storage/img/' . $espece->icone) }}"
@@ -132,7 +132,7 @@
                         x-on:click="open = {{ $troupeau->id }}" x-show="open==false">
                         @lang('ferme-detail.add')
                     </div>
-                    <div x-show="open == {{ $troupeau->id }}">
+                    <div x-show="open == {{ $troupeau->id }}" x-cloak>
                         <p x-on:click="open=false" x-on:keyup.escape="open=false"
                             class="text-gray-600 cursor-pointer hover:text-black active:underline">
                             @lang('ferme-detail.finish')

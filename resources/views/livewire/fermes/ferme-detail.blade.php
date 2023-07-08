@@ -10,7 +10,7 @@
                     @include('livewire.fermes.partials.ferme-show')
                 </div>
 
-                <div x-show="editFerme">
+                <div x-cloak x-show="editFerme">
                     @include('livewire.fermes.partials.ferme-edit')
                 </div>
 
