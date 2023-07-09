@@ -8,5 +8,6 @@ return [
     'molecules' => "Molecules",
     'efficacite' => "Efficacité",
     'nb_ax' => "Nombre d'animaux",
-
+    'clic_select' => "Cliquer pour sélectionner cette espèce",
+    'clic_unselect' => "Cliquer pour ne pas selectionner cette espèce"
 ];

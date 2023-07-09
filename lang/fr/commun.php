@@ -4,6 +4,8 @@ return [
     "accueil" => "Accueil",
     'date' => "Date",
     "espece" => "Espece",
+    'choix_espece' => "Sélectionner une espèce:",
+    'anthelm_search' => "Chercher un produit ...",
     'posologies' => "Posologies",
     'fermes' => 'Fermes',
     'save' => "Enregistrer",

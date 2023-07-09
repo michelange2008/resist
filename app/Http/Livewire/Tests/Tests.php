@@ -27,6 +27,7 @@ class Tests extends Component
     public $state = [];
     public $ax = [];
     public $search = '';
+    public $selectedEspeces = [];
     public $orderBy = 'T0';
     public $sensTri = "DESC";
 
@@ -53,6 +54,7 @@ class Tests extends Component
         $this->troupeaus = Troupeau::orderBy('ferme_id')->get();
         $this->animals = Animal::orderBy('troupeau_id')->get();
         $this->especes = Espece::all();
+        $this->selectedEspeces = Espece::pluck('id')->toArray();
         $this->index = true;
         $this->create = false;
         $this->getTests();
@@ -60,30 +62,31 @@ class Tests extends Component
 
     function getTests()
     {
-        $searchAnthelms = Anthelm::where('nom', 'like', '%'.$this->search.'%' )->pluck('id');
+        $searchAnthelms = Anthelm::where('nom', 'like', '%' . $this->search . '%')->pluck('id');
         $this->tests = Test::whereIn('anthelm_id', $searchAnthelms)
             ->orderBy($this->orderBy, $this->sensTri)->get();
+        $this->especes = Espece::all();
+        $this->selectedEspeces = Espece::pluck('id')->toArray();
     }
 
     function create()
     {
         $this->index = false;
         $this->create = true;
-
     }
 
     function del(Test $test)
     {
         $test->animals()->detach();
-        Test::destroy($test->id);   
+        Test::destroy($test->id);
         $this->getTests();
     }
 
-    function updated() {
+    function updated()
+    {
         $this->getTests();
         $this->troupeaus = Troupeau::where('ferme_id', $this->ferme)->get();
-        if ( $this->troupeau_id != null )
-        {
+        if ($this->troupeau_id != null) {
             $this->animals = Animal::where('troupeau_id', $this->troupeau_id)->get();
         }
         $this->calculEfficacite();
@@ -106,22 +109,20 @@ class Tests extends Component
 
         $this->create = false;
         $this->index = true;
-        
+
         $this->getTests();
     }
 
     function calculEfficacite(): void
     {
-        if ( $this->opg0 != null && $this->opg1 != null)
-        {
-            $efficacite = ( (1 - $this->opg1/$this->opg0 ) > 0 ) ? 1 - $this->opg1/$this->opg0 : 0;
-            $this->efficacite = round( 100 * $efficacite );
-
+        if ($this->opg0 != null && $this->opg1 != null) {
+            $efficacite = ((1 - $this->opg1 / $this->opg0) > 0) ? 1 - $this->opg1 / $this->opg0 : 0;
+            $this->efficacite = round(100 * $efficacite);
         }
-    
     }
 
-    function sort($col){
+    function sort($col)
+    {
         $this->sensTri = ($this->sensTri == "DESC") ? "ASC" : "DESC";
         $this->orderBy = $col;
         $this->getTests();
@@ -129,11 +130,14 @@ class Tests extends Component
 
     function afficheEspece(Espece $espece)
     {
-        
-        $troupeaux = Troupeau::where('espece_id', $espece->id)->pluck('id');
+        if (!in_array($espece->id, $this->selectedEspeces)) {
+            $this->selectedEspeces[] = $espece->id;
+        } else {
+            unset($this->selectedEspeces[array_search($espece->id, $this->selectedEspeces)]);
+        }
+        $troupeaux = Troupeau::whereIn('espece_id', $this->selectedEspeces)->pluck('id');
         $this->tests = Test::whereIn('troupeau_id', $troupeaux)
             ->orderBy($this->orderBy, $this->sensTri)->get();
-
     }
 
     public function render()

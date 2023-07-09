@@ -4,7 +4,7 @@
             <div class="overflow-hidden">
                 <table class="min-w-full text-sm font-light text-left">
 
-                    <thead class="font-medium border-b" x-data={orderBy: @entangle('orderBy')}>
+                    <thead class="font-medium border-b" x-data="{orderBy: @entangle('orderBy')}">
 
                         <th scope="col" class="px-6 py-4">
                             <p class="inline-block">@lang('commun.date')</p>
@@ -42,9 +42,7 @@
                         @foreach ($tests as $test)
                             <tr
                                 @if ($test->efficacite < 95) class="bg-red-100 border-b"
-                                @else class="bg-emerald-100 border-b" 
-                                @endif
-                            >
+                                @else class="bg-emerald-100 border-b" @endif>
 
                                 <td class="td">{{ \Carbon\Carbon::parse($test->T0)->format('d/m/Y') }}</td>
 
@@ -55,7 +53,7 @@
                                 </td>
 
                                 <td class="font-bold td hover:text-base">
-                                    <a href="{{ route('test.show', $test) }}" title="{{ __('commun.clic_detail')}}">
+                                    <a href="{{ route('test.show', $test) }}" title="{{ __('commun.clic_detail') }}">
                                         {{ $test->anthelm->nom }}
                                     </a>
                                 </td>
@@ -73,19 +71,18 @@
                                     {{ $test->animals()->count() }}
                                 </td>
 
-                                <td onclick="confirm('Sûr de vouloir supprimmer cet item ?') || event.stopImmediatePropagation()"
-                                    wire:click.prevent="del({{ $test }})"
-                                    class="m-auto text-base font-bold text-red-900 cursor-pointer td"
-                                    title="{{ __('commun.clic_del')}}">
-                                    <x-icones.del />
+                                <td class="m-auto text-base font-bold text-red-900 cursor-pointer td"
+                                    title="{{ __('commun.clic_del') }}">
+
+                                    <x-confirm_del :test="$test" />
                                 </td>
 
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
