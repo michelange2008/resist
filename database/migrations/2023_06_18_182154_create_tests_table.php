@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('typetest_id')->constrained();
             $table->foreignId('troupeau_id')->constrained();
             $table->date('T0');
             $table->date('T1');
