@@ -5,6 +5,7 @@ return [
     'farmName' => "Nom de l'exploitation",
     'farmEdit' => "Modifier l'exploitation",
     'nomTroupeau' => "Nom du nouveau troupeau",
+    'troupeau' => "Troupeau",
     'newNomTroupeau' => "Nouveau nom",
     'email' => "Email:",
     'mail' => "Adresse électronique",

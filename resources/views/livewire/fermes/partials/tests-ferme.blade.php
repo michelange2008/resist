@@ -7,19 +7,19 @@
 
     <thead class="font-medium border-b">
 
-        <th scope="col" class="px-6 py-4">Date</th>
+        <th scope="col" class="px-6 py-4">@lang('commun.date')</th>
 
-        <th scope="col" class="px-6 py-4">Type de test</th>
+        <th scope="col" class="px-6 py-4">@lang('tests.typetest')</th>
 
-        <th scope="col" class="px-6 py-4">Anthelminthique</th>
+        <th scope="col" class="px-6 py-4">@lang('tests.anthelm')</th>
         
-        <th scope="col" class="px-6 py-4">Molécules</th>
+        <th scope="col" class="px-6 py-4">@lang('tests.molecules')</th>
         
-        <th scope="col" class="px-6 py-4">Efficacité</th>
+        <th scope="col" class="px-6 py-4">@lang('tests.efficacite')</th>
         
-        <th scope="col" class="px-6 py-4">Troupeau</th>
+        <th scope="col" class="px-6 py-4">@lang('ferme-detail.troupeau')</th>
 
-        <th scope="col" class="px-6 py-4">Nombre d'animaux</th>
+        <th scope="col" class="px-6 py-4">@lang('tests.nb_ax')</th>
 
     </thead>
 
