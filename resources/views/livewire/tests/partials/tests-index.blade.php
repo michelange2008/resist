@@ -14,6 +14,14 @@
 
                         </th>
 
+                        <th scope="col" class="px-6 py-4">
+                            <p class="inline-block">@lang('tests.typetest')</p>
+                            <div class="inline-block cursor-pointer" wire:click="sort('typetest_id')">
+                                <x-icones.sort />
+                            </div>
+
+                        </th>
+
                         <th scope="col" class="flex flex-row px-6 py-4">@lang('commun.espece')</th>
 
                         <th scope="col" class="px-6 py-4">
@@ -46,6 +54,8 @@
 
                                 <td class="td">{{ \Carbon\Carbon::parse($test->T0)->format('d/m/Y') }}</td>
 
+                                <td class="text-base font-bold td">{{ $test->typetest->nom }}</td>
+
                                 <td class="td">
                                     <img class="p-1 w-12"
                                         src="{{ url('storage/img/' . $test->troupeau->espece->icone) }}"
@@ -71,7 +81,7 @@
                                     {{ $test->animals()->count() }}
                                 </td>
 
-                                <td class="m-auto text-base font-bold text-red-900 cursor-pointer td"
+                                <td class="text-base font-bold text-red-900 cursor-pointer td"
                                     title="{{ __('commun.clic_del') }}">
 
                                     <x-confirm_del :test="$test" />

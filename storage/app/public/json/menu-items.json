@@ -12,6 +12,10 @@
             "intitule": "Types de production",
             "url": "Production"
         },
+        "typetest": {
+            "intitule": "Types de test",
+            "url": "Typetest"
+        },
         "sep_1" : {
             "intitule": "hr"
         },

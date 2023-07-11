@@ -30,8 +30,9 @@ class Test extends Model
         return $this->belongsTo(Anthelm::class);    
     }
 
-    function typetest() : BelongsTo {
-        return $this->belongsTo(Test::class);
+    function typetest() : BelongsTo 
+    {
+        return $this->belongsTo(Typetest::class);
     }
 
 }

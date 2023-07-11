@@ -3,6 +3,7 @@ return [
     'tests' => "Les tests",
     'new_test' => "Ajouter un test",
     'all_tests' => "Tous les tests",
+    'typetest' => "Type de tests",
     'test_du_avec' => "Test du :date avec :anthelm",
     'anthelm' => "Anthelminthique",
     'molecules' => "Molecules",

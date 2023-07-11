@@ -1,6 +1,6 @@
-<div class="space-y-2">
-    <div>
-        <button type="button" class="inline-block" data-te-toggle="modal" data-te-target="#confirmDel{{ $test->id }}" data-te-ripple-init
+<div>
+    <div class="flex flex-col justify-center items-center">
+        <button type="button" data-te-toggle="modal" data-te-target="#confirmDel{{ $test->id }}" data-te-ripple-init
             data-te-ripple-color="light">
             <x-icones.del />
         </button>

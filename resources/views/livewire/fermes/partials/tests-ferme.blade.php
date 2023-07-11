@@ -9,13 +9,15 @@
 
         <th scope="col" class="px-6 py-4">Date</th>
 
-        <th scope="col" class="flex flex-row px-6 py-4">Troupeau</th>
+        <th scope="col" class="px-6 py-4">Type de test</th>
 
         <th scope="col" class="px-6 py-4">Anthelminthique</th>
-
+        
         <th scope="col" class="px-6 py-4">Molécules</th>
-
+        
         <th scope="col" class="px-6 py-4">Efficacité</th>
+        
+        <th scope="col" class="px-6 py-4">Troupeau</th>
 
         <th scope="col" class="px-6 py-4">Nombre d'animaux</th>
 
@@ -30,6 +32,8 @@
                 @else class="bg-emerald-100 border-b" @endif>
 
                 <td class="td">{{ \Carbon\Carbon::parse($test->T0)->format('d/m/Y') }}</td>
+
+                <td class="text-base font-bold td">{{ $test->typetest->nom }}</td>
 
                 <td class="font-bold td hover:text-base">
                     <a href="{{ route('test.show', $test) }}" title="Cliquer pour voir le détail...">

@@ -5,6 +5,10 @@
 
             @if ($test != null)
 
+                <div class="p-3 my-3 bg-gray-300 sm:w-2/3 md:w-1/2 lg:w-1/3">
+                    <p class="italic">Type de test:</p>
+                    <p class="px-3 text-lg font-bold">{{ $test->typetest->nom }}</p>
+                </div>
                 {{-- Anthelminthique utilisé et nom de la/les molécules.s --}}
                 <div class="mb-4">
                     <h2 class="h2">{{ $test->anthelm->nom }}</h2>
