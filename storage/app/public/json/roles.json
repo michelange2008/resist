@@ -1,0 +1,44 @@
+{
+    "nom": "Roles",
+    "model": "Role",
+    "icone": "roles.svg",
+    "orderBy": "nom",
+    "add": true,
+    "show": false,
+
+    "cols": {
+        "id": {
+            "col": "id",
+            "label": "Id",
+            "type": "id",
+            "taille": null,
+            "search" : false,
+            "onTable": false,
+            "align": "left",
+            "required": true,
+            "rules": null
+        },
+        "nom": {
+            "col": "nom",
+            "label": "Nom",
+            "type": "string",
+            "taille": 191,
+            "search" : true,
+            "onTable": true,
+            "align": "left",
+            "required": true,
+            "rules": "required|max:191|string"
+        },
+        "description": {
+            "col": "description",
+            "label": "Description",
+            "type": "string",
+            "taille": 191,
+            "search" : true,
+            "onTable": true,
+            "align": "left",
+            "required": true,
+            "rules": "required|max:191|string"
+        }
+    }
+}

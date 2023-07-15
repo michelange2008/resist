@@ -29,4 +29,5 @@ return [
     'effectif' => "Effectif",
     'animaux' => "Animaux",
     'tests' => "Les tests",
+    'noTest' => "Pas encore de test réalisé",
 ];

@@ -3,6 +3,7 @@
 return [
     "accueil" => "Accueil",
     'date' => "Date",
+    'role' => "Rôle",
     "espece" => "Espece",
     'choix_espece' => "Sélectionner une espèce:",
     'anthelm_search' => "Chercher un produit ...",

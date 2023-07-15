@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('commune_id')->constrained();
             $table->decimal('latitude', 8, 6)->nullable();
             $table->decimal('longitude', 9, 6)->nullable();
+            $table->foreignId('user_id')->constrained();
         });
     }
 

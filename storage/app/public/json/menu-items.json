@@ -45,6 +45,13 @@
         "animal": {
            "intitule": "Animaux",
            "url": "Animal"
+       },
+       "sep_3" : {
+           "intitule": "hr"
+       },
+       "roles" : {
+           "intitule": "Roles",
+           "url": "Role"
        }
     }
 }

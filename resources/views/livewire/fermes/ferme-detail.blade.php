@@ -29,7 +29,7 @@
 
             @else
                 <div class="overflow-hidden p-5 my-3 text-xl bg-white shadow-sm sm:rounded-lg">
-                    <h2 class="h2">Pas encore de test réalisé</h2>
+                    <h2 class="h2">@lang('ferme-detail.noTest')</h2>
                 </div>
 
             @endif

@@ -29,4 +29,8 @@ class Ferme extends Model
         return $this->throughTroupeaus()->hasTests();
     }
 
+    function user() : BelongsTo {
+        return $this->belongsTo(User::class);
+    }
+
  }
