@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\PosologieController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Accueil\Accueil;
 use App\Http\Livewire\Fermes\Fermes;
 use App\Http\Livewire\Fermes\FermeDetail;
 use App\Http\Livewire\ItemsFactory;
 use App\Http\Livewire\Tests\Tests;
 use App\Http\Livewire\Tests\TestShow;
 use App\Http\Livewire\Associations;
+use App\Http\Livewire\FermeUser\FermeUser;
+use App\Http\Livewire\TestsUser\TestsUser;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,14 +29,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/accueil', function () {
+//     return view('accueil');
+// })->middleware(['auth', 'verified'])->name('accueil');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('accueil', Accueil::class)->name('accueil');
+    Route::get('tests-utilisateur', TestsUser::class)->name('tests-user');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('is.eleveur')->group(function () {
+    Route::get('ferme-utilisateur', FermeUser::class)->name('ferme-user');
 });
 
 Route::middleware('is.admin')->group(function () {

@@ -5,14 +5,14 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex items-center shrink-0">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('accueil') }}">
                         <x-application-logo class="block w-auto h-9 text-gray-800 fill-current" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('accueil')" :active="request()->routeIs('accueil')">
                         @lang('commun.accueil')
                     </x-nav-link>
                 </div>
@@ -41,6 +41,23 @@
                         </x-nav-link>
                     </div>
                 @else
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('tests-user')" :active="request()->routeIs('tests-user')">
+                            @lang('tests.tests')
+                        </x-nav-link>
+                    </div>
+
+                @endif
+
+                @if (Auth::user()->role->nom == 'eleveur')
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('ferme-user')" :active="request()->routeIs('ferm-user')">
+                            @lang('ferme-detail.farm')
+                        </x-nav-link>
+                    </div>
+
                 @endif
             </div>
 
@@ -101,7 +118,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('accueil')" :active="request()->routeIs('accueil')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>

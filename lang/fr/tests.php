@@ -1,6 +1,7 @@
 <?php
 return [    
     'tests' => "Les tests",
+    'synthese' => "Synthèse",
     'new_test' => "Ajouter un test",
     'all_tests' => "Tous les tests",
     'typetest' => "Type de tests",
