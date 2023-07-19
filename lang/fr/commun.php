@@ -8,6 +8,7 @@ return [
     'choix_espece' => "Sélectionner une espèce:",
     'anthelm_search' => "Chercher un produit ...",
     'posologies' => "Posologies",
+    'associations' => "Associations",
     'fermes' => 'Fermes',
     'save' => "Enregistrer",
     'cancel' => "Annuler",

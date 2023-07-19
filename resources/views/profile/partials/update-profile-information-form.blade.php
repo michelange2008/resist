@@ -57,7 +57,9 @@
                     @if ($role->id == $user->role_id)
                         <option class="px-8" selected value="{{ $role->id }}">{{ $role->description }}</option>
                     @else
-                        <option class="px-8" value="{{ $role->id }}">{{ $role->description }}</option>
+                        @if (!$user->isAdmin() && $role->nom != 'admin')
+                            <option class="px-8" value="{{ $role->id }}">{{ $role->description }}</option>
+                        @endif
                     @endif
                 @endforeach
             </select>

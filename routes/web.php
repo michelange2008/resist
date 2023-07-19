@@ -7,6 +7,7 @@ use App\Http\Livewire\Fermes\FermeDetail;
 use App\Http\Livewire\ItemsFactory;
 use App\Http\Livewire\Tests\Tests;
 use App\Http\Livewire\Tests\TestShow;
+use App\Http\Livewire\Associations;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+Route::middleware('is.admin')->group(function () {
     Route::get('items/{model}', ItemsFactory::class);
     Route::get('posologie', [PosologieController::class, 'index'])->name('posologie.index');
     Route::get('posologie/edit/{anthelm}/{espece}', [PosologieController::class, 'edit'])->name('posologie.edit');
@@ -41,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('tests/{test}', TestShow::class)->name('test.show');
     Route::get('fermes', Fermes::class)->name('fermes');
     Route::get('ferme/{ferme}', FermeDetail::class)->name('ferme');
+    Route::get('associations', Associations::class)->name('associations');
 });
 
 require __DIR__.'/auth.php';

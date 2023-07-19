@@ -10,6 +10,7 @@
                     <table class="min-w-full text-sm font-light text-left">
                         <thead class="font-medium border-b">
                             <th class="td">Nom</th>
+                            <th class="td">Email (si utilisateur)</th>
                             <th class="td">Commune</th>
                             <th class="td">Troupeaux</th>
                             <th class="td">Tests</th>
@@ -21,6 +22,9 @@
                                         wire:click="fermeDetail( {{ $ferme }} )"
                                         title="Cliquer pour afficher le détail de cette exploitation">
                                         <p>{{ $ferme->nom }} <span class="inline-block invisible group-hover:visible"><x-icones.eye/></span></p>
+                                    </td>
+                                    <td class="align-top td">
+                                        {{ $ferme->user->email ?? " - " }}
                                     </td>
                                     <td class="align-top td">{{ $ferme->commune->Commune }} ({{ $ferme->commune->Departement}})</td>
                                     <td class="flex flex-row gap-3 td">

@@ -29,7 +29,11 @@ class Ferme extends Model
         return $this->throughTroupeaus()->hasTests();
     }
 
-    function user() : BelongsTo {
+    function eleveur() : BelongsTo {
+        return $this->belongsTo(User::class);
+    }
+
+    function veto() : BelongsTo {
         return $this->belongsTo(User::class);
     }
 

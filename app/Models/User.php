@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -22,6 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role_id',
         'password',
     ];
 
@@ -45,11 +47,34 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    function isAdmin() : bool 
+    {
+        if ($this->role->nom == 'admin' ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function isVeto() : bool
+    {
+        if($this->role->nom == 'veto') {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+
     function role() : BelongsTo {
         return $this->belongsTo(Role::class);
     }
 
     function ferme() : HasOne {
         return $this->hasOne(Ferme::class);
+    }
+
+    function fermes() : HasMany {
+        return $this->hasMany(Ferme::class);
     }
 }
