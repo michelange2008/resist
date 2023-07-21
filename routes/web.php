@@ -29,9 +29,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/accueil', function () {
-//     return view('accueil');
-// })->middleware(['auth', 'verified'])->name('accueil');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('accueil', Accueil::class)->name('accueil');

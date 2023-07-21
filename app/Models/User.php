@@ -63,7 +63,15 @@ class User extends Authenticatable
         } else {
             return false;
         }
-        
+    }
+
+    function isEleveur() : bool
+    {
+        if($this->role->nom == 'eleveur') {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function role() : BelongsTo {

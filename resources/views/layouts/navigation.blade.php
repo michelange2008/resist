@@ -11,11 +11,13 @@
                 </div>
 
                 <!-- Navigation Links -->
+                {{-- Le menu accueil est accessible à tout le monde --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('accueil')" :active="request()->routeIs('accueil')">
                         @lang('commun.accueil')
                     </x-nav-link>
                 </div>
+                {{-- Les menus qui suivent sont réservé à l'administrateur du site --}}
                 @if (Auth::user()->isAdmin())
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('tests')" :active="request()->routeIs('tests')">
@@ -40,6 +42,7 @@
                             @lang('commun.associations')
                         </x-nav-link>
                     </div>
+                    
                 @else
 
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -59,6 +62,7 @@
                     </div>
 
                 @endif
+
             </div>
 
             <!-- Settings Dropdown -->
