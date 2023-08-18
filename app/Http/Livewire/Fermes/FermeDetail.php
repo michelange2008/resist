@@ -39,6 +39,7 @@ class FermeDetail extends Component
         'herd.effectif' => 'required|numeric',
         'herd.espece_id' => 'required|numeric',
         'herd.production_id' => 'required|numeric',
+        'herd.ferme_id' => 'required|numeric',
     ];
 
     protected $validationAttributes = [
@@ -149,7 +150,13 @@ class FermeDetail extends Component
     function storeTroupeau(Ferme $ferme)
     {
         $this->herd['ferme_id'] = $ferme->id;
-        $this->validate();
+        $this->validate([
+            'herd.nom' => 'required|string|max:191',
+            'herd.effectif' => 'required|numeric',
+            'herd.espece_id' => 'required|numeric',
+            'herd.production_id' => 'required|numeric',
+            'herd.ferme_id' => 'required|numeric',
+        ]);
         $troupeau = Troupeau::create($this->herd);
         $this->ferme = Ferme::find($ferme->id);
         foreach ($this->animaux as $animal) {

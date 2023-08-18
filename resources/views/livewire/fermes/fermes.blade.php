@@ -17,14 +17,14 @@
                         </thead>
                         <tbody>
                             @foreach ($fermes as $ferme)
-                                <tr class="group hover:bg-gray-100">
+                                <tr class="border-b-2 group hover:bg-gray-100">
                                     <td class="align-top cursor-pointer td group-hover:font-bold" 
                                         wire:click="fermeDetail( {{ $ferme }} )"
                                         title="Cliquer pour afficher le détail de cette exploitation">
                                         <p>{{ $ferme->nom }} <span class="inline-block invisible group-hover:visible"><x-icones.eye/></span></p>
                                     </td>
                                     <td class="align-top td">
-                                        {{ $ferme->user->email ?? " - " }}
+                                        {{ $ferme->eleveur->name ?? " - " }}
                                     </td>
                                     <td class="align-top td">{{ $ferme->commune->Commune }} ({{ $ferme->commune->Departement}})</td>
                                     <td class="flex flex-row gap-3 td">
